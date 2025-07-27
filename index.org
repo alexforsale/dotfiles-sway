@@ -361,7 +361,6 @@ I will start from the default (on /archlinux/ it's provided in the package, and 
   bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
   bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
   # Special key to take a screenshot with grim
-  bindsym Print exec grim
 
   bindsym XF86AudioPlay exec playerctl play-pause
   bindsym XF86AudioNext exec playerctl next
@@ -371,6 +370,15 @@ I will start from the default (on /archlinux/ it's provided in the package, and 
   bindsym $mod+Mod1+t exec $mail
 
   bindsym XF86MyComputer exec $browser
+#+end_src
+*** Screenshot
+Pressing the ~Print~ key will capture the screen, save it to =~/Picture/Screenshots/~= and also add it to the copy buffer.
+#+begin_src conf
+  bindsym Print exec grimshot --notify savecopy screen "${HOME}/Pictures/Screenshots/grimshot-$(date +%Y-%m-%d_%H_%M_%S).png"
+#+end_src
+Also set it to ~$mod+Shift+s~ simulating the windows keybinding.
+#+begin_src
+  bindsym $mod+Shift+s exec grimshot --notify savecopy screen "${HOME}/Pictures/Screenshots/grimshot-$(date +%Y-%m-%d_%H_%M_%S).png"
 #+end_src
 *** Browser
 #+begin_src conf
