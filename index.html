@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2025-07-27 Sun 15:17 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Sway Configuration</title>
+<meta name="author" content="Kristian Alexander P" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/readtheorg.css"/>
+<link rel="stylesheet" type="text/css" href="src/readtheorg_theme/css/search.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/search.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
+<style> #content{max-width:1800px;}</style>
+<style> p{max-width:800px;}</style>
+<style> li{max-width:800px;}</style>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Sway Configuration</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org5eb07a4">Sway</a></li>
+<li><a href="#org4502e63">The configuration.</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org5eb07a4" class="outline-2">
+<h2 id="org5eb07a4">Sway</h2>
+<div class="outline-text-2" id="text-org5eb07a4">
+<p>
+This is my personal <i>sway</i> window manager configuration. The aim is:
+</p>
+<dl class="org-dl">
+<dt>Very minimal configuration</dt><dd>Copy what worked from my <a href="https://alexforsale.github.io/dotfiles-i3/">i3 configuration</a>.</dd>
+<dt>Use the default application</dt><dd>When possible, that is.</dd>
+</dl>
+</div>
+</div>
+<div id="outline-container-org4502e63" class="outline-2">
+<h2 id="org4502e63">The configuration.</h2>
+<div class="outline-text-2" id="text-org4502e63">
+<p>
+I will start from the default (on <i>archlinux</i> it's provided in the package, and can be found on <code>/etc/sway/config</code>)
+</p>
+<div class="org-src-container">
+<pre class="src src-conf" id="orgd6c7911"><span style="color: #b22222;"># </span><span style="color: #b22222;">Default config for sway
+</span><span style="color: #b22222;">#</span><span style="color: #b22222;">
+</span><span style="color: #b22222;"># </span><span style="color: #b22222;">Copy this to ~/.config/sway/config and edit it to your liking.
+</span><span style="color: #b22222;">#</span><span style="color: #b22222;">
+</span><span style="color: #b22222;"># </span><span style="color: #b22222;">Read `man 5 sway` for a complete reference.
+</span>
+<span style="color: #b22222;">### </span><span style="color: #b22222;">Variables
+</span><span style="color: #b22222;">#</span><span style="color: #b22222;">
+</span><span style="color: #b22222;"># </span><span style="color: #b22222;">Logo key. Use Mod1 for Alt.
+</span>set $mod Mod4
+<span style="color: #b22222;"># </span><span style="color: #b22222;">Home row direction keys, like vim
+</span>set $left h
+set $down j
+set $up k
+set $right l
+<span style="color: #b22222;"># </span><span style="color: #b22222;">Your preferred terminal emulator
+</span>set $term foot
+<span style="color: #b22222;"># </span><span style="color: #b22222;">Your preferred application launcher
+</span>set $menu wmenu-run
+
+<span style="color: #b22222;">### </span><span style="color: #b22222;">Output configuration
+</span><span style="color: #b22222;">#</span><span style="color: #b22222;">
+</span><span style="color: #b22222;"># </span><span style="color: #b22222;">Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
+</span>output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+<span style="color: #b22222;">#</span><span style="color: #b22222;">
+</span><span style="color: #b22222;"># </span><span style="color: #b22222;">Example configuration:
+</span><span style="color: #b22222;">#</span><span style="color: #b22222;">
+</span><span style="color: #b22222;">#   </span><span style="color: #b22222;">output HDMI-A-1 resolution 1920x1080 position 1920,0
+</span><span style="color: #b22222;">#</span><span style="color: #b22222;">
+</span><span style="color: #b22222;"># </span><span style="color: #b22222;">You can get the names of your outputs by running: swaymsg -t get_outputs
+</span>
+<span style="color: #b22222;">### </span><span style="color: #b22222;">Idle configuration
+</span><span style="color: #b22222;">#</span><span style="color: #b22222;">
+</span><span style="color: #b22222;"># </span><span style="color: #b22222;">Example configuration:
+</span><span style="color: #b22222;">#</span><span style="color: #b22222;">
+</span><span style="color: #b22222;"># </span><span style="color: #b22222;">exec swayidle -w \
+</span><span style="color: #b22222;">#          </span><span style="color: #b22222;">timeout 300 'swaylock -f -c 000000' \
+</span><span style="color: #b22222;">#          </span><span style="color: #b22222;">timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+</span><span style="color: #b22222;">#          </span><span style="color: #b22222;">before-sleep 'swaylock -f -c 000000'
+</span><span style="color: #b22222;">#</span><span style="color: #b22222;">
+</span><span style="color: #b22222;"># </span><span style="color: #b22222;">This will lock your screen after 300 seconds of inactivity, then turn off
+</span><span style="color: #b22222;"># </span><span style="color: #b22222;">your displays after another 300 seconds, and turn your screens back on when
+</span><span style="color: #b22222;"># </span><span style="color: #b22222;">resumed. It will also lock your screen before your computer goes to sleep.
+</span>
+<span style="color: #b22222;">### </span><span style="color: #b22222;">Input configuration
+</span><span style="color: #b22222;">#</span><span style="color: #b22222;">
+</span><span style="color: #b22222;"># </span><span style="color: #b22222;">Example configuration:
+</span><span style="color: #b22222;">#</span><span style="color: #b22222;">
+</span><span style="color: #b22222;">#   </span><span style="color: #b22222;">input type:touchpad {
+</span><span style="color: #b22222;">#       </span><span style="color: #b22222;">dwt enabled
+</span><span style="color: #b22222;">#       </span><span style="color: #b22222;">tap enabled
+</span><span style="color: #b22222;">#       </span><span style="color: #b22222;">natural_scroll enabled
+</span><span style="color: #b22222;">#       </span><span style="color: #b22222;">middle_emulation enabled
+</span><span style="color: #b22222;">#   </span><span style="color: #b22222;">}
+</span><span style="color: #b22222;">#</span><span style="color: #b22222;">
+</span><span style="color: #b22222;">#   </span><span style="color: #b22222;">input type:keyboard {
+</span><span style="color: #b22222;">#       </span><span style="color: #b22222;">xkb_layout "eu"
+</span><span style="color: #b22222;">#   </span><span style="color: #b22222;">}
+</span><span style="color: #b22222;">#</span><span style="color: #b22222;">
+</span><span style="color: #b22222;"># </span><span style="color: #b22222;">You can also configure each device individually.
+</span><span style="color: #b22222;"># </span><span style="color: #b22222;">Read `man 5 sway-input` for more information about this section.
+</span>
+<span style="color: #b22222;">### </span><span style="color: #b22222;">Key bindings
+</span><span style="color: #b22222;">#</span><span style="color: #b22222;">
+</span><span style="color: #b22222;"># </span><span style="color: #b22222;">Basics:
+</span><span style="color: #b22222;">#</span><span style="color: #b22222;">
+</span>    <span style="color: #b22222;"># </span><span style="color: #b22222;">Start a terminal
+</span>    bindsym $mod+Return exec $term
+
+    <span style="color: #b22222;"># </span><span style="color: #b22222;">Kill focused window
+</span>    bindsym $mod+Shift+q kill
+
+    <span style="color: #b22222;"># </span><span style="color: #b22222;">Start your launcher
+</span>    bindsym $mod+d exec $menu
+
+    <span style="color: #b22222;"># </span><span style="color: #b22222;">Drag floating windows by holding down $mod and left mouse button.
+</span>    <span style="color: #b22222;"># </span><span style="color: #b22222;">Resize them with right mouse button + $mod.
+</span>    <span style="color: #b22222;"># </span><span style="color: #b22222;">Despite the name, also works for non-floating windows.
+</span>    <span style="color: #b22222;"># </span><span style="color: #b22222;">Change normal to inverse to use left mouse button for resizing and right
+</span>    <span style="color: #b22222;"># </span><span style="color: #b22222;">mouse button for dragging.
+</span>    floating_modifier $mod normal
+
+    <span style="color: #b22222;"># </span><span style="color: #b22222;">Reload the configuration file
+</span>    bindsym $mod+Shift+c reload
+
+    <span style="color: #b22222;"># </span><span style="color: #b22222;">Exit sway (logs you out of your Wayland session)
+</span>    bindsym $mod+Shift+e exec swaynag -t warning -m <span style="color: #bc8f8f;">'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.'</span> -B <span style="color: #bc8f8f;">'Yes, exit sway'</span> <span style="color: #bc8f8f;">'swaymsg exit'</span>
+<span style="color: #b22222;">#</span><span style="color: #b22222;">
+</span><span style="color: #b22222;"># </span><span style="color: #b22222;">Moving around:
+</span><span style="color: #b22222;">#</span><span style="color: #b22222;">
+</span>    <span style="color: #b22222;"># </span><span style="color: #b22222;">Move your focus around
+</span>    bindsym $mod+$left focus left
+    bindsym $mod+$down focus down
+    bindsym $mod+$up focus up
+    bindsym $mod+$right focus right
+    <span style="color: #b22222;"># </span><span style="color: #b22222;">Or use $mod+[up|down|left|right]
+</span>    bindsym $mod+Left focus left
+    bindsym $mod+Down focus down
+    bindsym $mod+Up focus up
+    bindsym $mod+Right focus right
+
+    <span style="color: #b22222;"># </span><span style="color: #b22222;">Move the focused window with the same, but add Shift
+</span>    bindsym $mod+Shift+$left move left
+    bindsym $mod+Shift+$down move down
+    bindsym $mod+Shift+$up move up
+    bindsym $mod+Shift+$right move right
+    <span style="color: #b22222;"># </span><span style="color: #b22222;">Ditto, with arrow keys
+</span>    bindsym $mod+Shift+Left move left
+    bindsym $mod+Shift+Down move down
+    bindsym $mod+Shift+Up move up
+    bindsym $mod+Shift+Right move right
+<span style="color: #b22222;">#</span><span style="color: #b22222;">
+</span><span style="color: #b22222;"># </span><span style="color: #b22222;">Workspaces:
+</span><span style="color: #b22222;">#</span><span style="color: #b22222;">
+</span>    <span style="color: #b22222;"># </span><span style="color: #b22222;">Switch to workspace
+</span>    bindsym $mod+1 workspace number 1
+    bindsym $mod+2 workspace number 2
+    bindsym $mod+3 workspace number 3
+    bindsym $mod+4 workspace number 4
+    bindsym $mod+5 workspace number 5
+    bindsym $mod+6 workspace number 6
+    bindsym $mod+7 workspace number 7
+    bindsym $mod+8 workspace number 8
+    bindsym $mod+9 workspace number 9
+    bindsym $mod+0 workspace number 10
+    <span style="color: #b22222;"># </span><span style="color: #b22222;">Move focused container to workspace
+</span>    bindsym $mod+Shift+1 move container to workspace number 1
+    bindsym $mod+Shift+2 move container to workspace number 2
+    bindsym $mod+Shift+3 move container to workspace number 3
+    bindsym $mod+Shift+4 move container to workspace number 4
+    bindsym $mod+Shift+5 move container to workspace number 5
+    bindsym $mod+Shift+6 move container to workspace number 6
+    bindsym $mod+Shift+7 move container to workspace number 7
+    bindsym $mod+Shift+8 move container to workspace number 8
+    bindsym $mod+Shift+9 move container to workspace number 9
+    bindsym $mod+Shift+0 move container to workspace number 10
+    <span style="color: #b22222;"># </span><span style="color: #b22222;">Note: workspaces can have any name you want, not just numbers.
+</span>    <span style="color: #b22222;"># </span><span style="color: #b22222;">We just use 1-10 as the default.
+</span><span style="color: #b22222;">#</span><span style="color: #b22222;">
+</span><span style="color: #b22222;"># </span><span style="color: #b22222;">Layout stuff:
+</span><span style="color: #b22222;">#</span><span style="color: #b22222;">
+</span>    <span style="color: #b22222;"># </span><span style="color: #b22222;">You can "split" the current object of your focus with
+</span>    <span style="color: #b22222;"># </span><span style="color: #b22222;">$mod+b or $mod+v, for horizontal and vertical splits
+</span>    <span style="color: #b22222;"># </span><span style="color: #b22222;">respectively.
+</span>    bindsym $mod+b splith
+    bindsym $mod+v splitv
+
+    <span style="color: #b22222;"># </span><span style="color: #b22222;">Switch the current container between different layout styles
+</span>    bindsym $mod+s layout stacking
+    bindsym $mod+w layout tabbed
+    bindsym $mod+e layout toggle split
+
+    <span style="color: #b22222;"># </span><span style="color: #b22222;">Make the current focus fullscreen
+</span>    bindsym $mod+f fullscreen
+
+    <span style="color: #b22222;"># </span><span style="color: #b22222;">Toggle the current focus between tiling and floating mode
+</span>    bindsym $mod+Shift+space floating toggle
+
+    <span style="color: #b22222;"># </span><span style="color: #b22222;">Swap focus between the tiling area and the floating area
+</span>    bindsym $mod+space focus mode_toggle
+
+    <span style="color: #b22222;"># </span><span style="color: #b22222;">Move focus to the parent container
+</span>    bindsym $mod+a focus parent
+<span style="color: #b22222;">#</span><span style="color: #b22222;">
+</span><span style="color: #b22222;"># </span><span style="color: #b22222;">Scratchpad:
+</span><span style="color: #b22222;">#</span><span style="color: #b22222;">
+</span>    <span style="color: #b22222;"># </span><span style="color: #b22222;">Sway has a "scratchpad", which is a bag of holding for windows.
+</span>    <span style="color: #b22222;"># </span><span style="color: #b22222;">You can send windows there and get them back later.
+</span>
+    <span style="color: #b22222;"># </span><span style="color: #b22222;">Move the currently focused window to the scratchpad
+</span>    bindsym $mod+Shift+minus move scratchpad
+
+    <span style="color: #b22222;"># </span><span style="color: #b22222;">Show the next scratchpad window or hide the focused scratchpad window.
+</span>    <span style="color: #b22222;"># </span><span style="color: #b22222;">If there are multiple scratchpad windows, this command cycles through them.
+</span>    bindsym $mod+minus scratchpad show
+<span style="color: #b22222;">#</span><span style="color: #b22222;">
+</span><span style="color: #b22222;"># </span><span style="color: #b22222;">Resizing containers:
+</span><span style="color: #b22222;">#</span><span style="color: #b22222;">
+</span><span style="color: #228b22;">mode </span><span style="color: #228b22;">"resize"</span> {
+    <span style="color: #b22222;"># </span><span style="color: #b22222;">left will shrink the containers width
+</span>    <span style="color: #b22222;"># </span><span style="color: #b22222;">right will grow the containers width
+</span>    <span style="color: #b22222;"># </span><span style="color: #b22222;">up will shrink the containers height
+</span>    <span style="color: #b22222;"># </span><span style="color: #b22222;">down will grow the containers height
+</span>    bindsym $left resize shrink width 10px
+    bindsym $down resize grow height 10px
+    bindsym $up resize shrink height 10px
+    bindsym $right resize grow width 10px
+
+    <span style="color: #b22222;"># </span><span style="color: #b22222;">Ditto, with arrow keys
+</span>    bindsym Left resize shrink width 10px
+    bindsym Down resize grow height 10px
+    bindsym Up resize shrink height 10px
+    bindsym Right resize grow width 10px
+
+    <span style="color: #b22222;"># </span><span style="color: #b22222;">Return to default mode
+</span>    bindsym Return mode <span style="color: #bc8f8f;">"default"</span>
+    bindsym Escape mode <span style="color: #bc8f8f;">"default"</span>
+}
+bindsym $mod+r mode <span style="color: #bc8f8f;">"resize"</span>
+<span style="color: #b22222;">#</span><span style="color: #b22222;">
+</span><span style="color: #b22222;"># </span><span style="color: #b22222;">Utilities:
+</span><span style="color: #b22222;">#</span><span style="color: #b22222;">
+</span>    <span style="color: #b22222;"># </span><span style="color: #b22222;">Special keys to adjust volume via PulseAudio
+</span>    bindsym --locked XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
+    bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
+    bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
+    bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
+    <span style="color: #b22222;"># </span><span style="color: #b22222;">Special keys to adjust brightness via brightnessctl
+</span>    bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
+    bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
+    <span style="color: #b22222;"># </span><span style="color: #b22222;">Special key to take a screenshot with grim
+</span>    bindsym Print exec grim
+
+<span style="color: #b22222;">#</span><span style="color: #b22222;">
+</span><span style="color: #b22222;"># </span><span style="color: #b22222;">Status Bar:
+</span><span style="color: #b22222;">#</span><span style="color: #b22222;">
+</span><span style="color: #b22222;"># </span><span style="color: #b22222;">Read `man 5 sway-bar` for more information about this section.
+</span><span style="color: #228b22;">bar</span> {
+    position top
+
+    <span style="color: #b22222;"># </span><span style="color: #b22222;">When the status_command prints a new line to stdout, swaybar updates.
+</span>    <span style="color: #b22222;"># </span><span style="color: #b22222;">The default just shows the current date and time.
+</span>    status_command while date +<span style="color: #bc8f8f;">'%Y-%m-%d %X'</span>; do sleep 1; done
+
+    <span style="color: #228b22;">colors</span> {
+        statusline <span style="color: #b22222;">#</span><span style="color: #b22222;">ffffff
+</span>        background <span style="color: #b22222;">#</span><span style="color: #b22222;">323232
+</span>        inactive_workspace <span style="color: #b22222;">#</span><span style="color: #b22222;">32323200 #32323200 #5c5c5c
+</span>    }
+}
+
+include /etc/sway/config.d/*
+</pre>
+</div>
+
+
+<div id="org6b4b2c9" class="figure">
+<p><img src="./assets/img/default-look.png" alt="default-look.png" />
+</p>
+<p><span class="figure-number">Figure 1: </span>The default sway</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: 2025-07-27 Sun 00:00</p>
+<p class="author">Author: Kristian Alexander P</p>
+<p class="date">Created: 2025-07-27 Sun 15:17</p>
+</div>
+</body>
+</html>
