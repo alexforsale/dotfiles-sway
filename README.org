@@ -1,0 +1,25 @@
+#+options: ':nil *:t -:t ::t <:t H:2 \n:nil ^:t arch:headline
+#+options: author:t broken-links:nil c:nil creator:nil
+#+options: d:(not "LOGBOOK") date:t e:t email:nil f:t inline:t num:nil
+#+options: p:nil pri:nil prop:nil stat:t tags:t tasks:t tex:t
+#+options: timestamp:t title:t toc:t todo:t |:t
+#+title: Sway Configuration
+#+date: <2025-07-27 Sun>
+#+author: Kristian Alexander P
+#+email: alexforsale@yahoo.com
+#+language: en
+#+select_tags: export
+#+exclude_tags: noexport
+#+creator: Emacs 30.1 (Org mode 9.8-pre)
+#+cite_export:
+#+startup: indent fold
+
+#+begin_html
+<a href="https://raw.githubusercontent.com/alexforsale/dotfiles-sway/main/LICENSE.md">
+<img alt="GPLv3" src="https://img.shields.io/github/license/alexforsale/dotfiles-sway"/>
+</a>
+
+<a href="https://github.com/alexforsale/dotfiles-sway/actions/workflows/publish.yml">
+<img alt="Build status" src="https://github.com/alexforsale/dotfiles-sway/actions/workflows/publish.yml/badge.svg"/>
+</a>
+#+end_html
