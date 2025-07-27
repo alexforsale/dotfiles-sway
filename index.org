@@ -25,7 +25,7 @@ This is my personal /sway/ window manager configuration. The aim is:
 * The configuration.
 I will start from the default (on /archlinux/ it's provided in the package, and can be found on ~/etc/sway/config~)
 #+name: sway config
-#+begin_src conf
+#+begin_src conf :tangle no
   # Default config for sway
   #
   # Copy this to ~/.config/sway/config and edit it to your liking.
@@ -263,3 +263,657 @@ I will start from the default (on /archlinux/ it's provided in the package, and 
 #+name: default sway
 #+caption: The default sway
 [[./assets/img/default-look.png]]
+* Replicating my i3 config
+:PROPERTIES:
+:header-args: :tangle ./.config/sway/config :mkdirp t
+:END:
+** Variables
+#+begin_src conf
+  set $mod Mod4
+  # Home row direction keys, like vim
+  set $left h
+  set $down j
+  set $up k
+  set $right l
+  # Your preferred terminal emulator
+  set $terminal alacritty
+  # Your preferred application launcher
+  set $menu wmenu-run
+
+  set $mail thunderbird
+  set $browser firefox
+  set $file thunar
+  set $guiemacs emacsclient -c -a emacs
+  set $tuiemacs emacsclient -t -a emacs
+  set $notify exec notify-send -t 1000
+
+  set $ws1 "1: Term"
+  set $ws2 "2: Code"
+  set $ws3 "3: Web"
+  set $ws4 "4: Mail"
+  set $ws5 "5: File"
+  set $ws6 "6: Office"
+  set $ws7 "7: Others"
+  set $ws8 "8: Media"
+  set $ws9 "9: Remote"
+  set $ws10 "10: Steam"
+#+end_src
+** Colorscheme
+#+begin_src conf
+  set $color0  #073642
+  set $color1  #dc322f
+  set $color2  #859900
+  set $color3  #b58900
+  set $color4  #268bd2
+  set $color5  #d33682
+  set $color6  #2aa198
+  set $color7  #eee8d5
+  set $color8  #6c7c80
+  set $color9  #dc322f
+  set $color10  #859900
+  set $color11  #b58900
+  set $color12  #268bd2
+  set $color13  #d33682
+  set $color14  #2aa198
+  set $color15  #eee8d5
+
+  set $foreground $color7
+  set $background $color0
+#+end_src
+
+#+begin_src conf
+  client.focused            $foreground  $color8      $foreground $background $background
+  client.unfocused          $color8      $background  $foreground $background $background
+  client.focused_inactive   $foreground  $background  $foreground $background $background
+  client.urgent             $foreground  $background  $foreground $background $background
+  client.placeholder        $foreground  $background  $foreground $background $background
+  client.focused_tab_title  $foreground  $background  $foreground $background $background
+#+end_src
+** Output
+#+begin_src conf
+  output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+#+end_src
+** Gaps
+#+begin_src conf
+  gaps inner 8px
+  gaps outer 8px
+  smart_gaps on
+#+end_src
+** Font
+#+begin_src conf
+  font pango:JetBrainsMonoNL Nerd Font Mono 8
+#+end_src
+** Application Autostart
+#+begin_src conf
+  exec mako --config ~/.config/mako/config
+  exec emacs --daemon
+#+end_src
+** Colors
+** Keybinding
+*** Media keys
+#+begin_src conf
+  # Special keys to adjust volume via PulseAudio
+  bindsym --locked XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
+  bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
+  bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
+  bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
+  # Special keys to adjust brightness via brightnessctl
+  bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
+  bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
+  # Special key to take a screenshot with grim
+  bindsym Print exec grim
+
+  bindsym XF86AudioPlay exec playerctl play-pause
+  bindsym XF86AudioNext exec playerctl next
+  bindsym XF86AudioPrev exec playerctl previous
+
+  bindsym XF86Mail exec $mail
+  bindsym $mod+Mod1+t exec $mail
+
+  bindsym XF86MyComputer exec $browser
+#+end_src
+*** Browser
+#+begin_src conf
+  bindsym $mod+Mod1+f exec $browser
+#+end_src
+*** Music player
+#+begin_src conf
+  bindsym $mod+Mod1+m exec $terminal --class ncmpcpp -e ncmpcpp
+#+end_src
+*** Vim
+#+begin_src conf
+  bindsym $mod+Mod1+v exec $terminal --class nvim -e nvim
+#+end_src
+*** Dired
+#+begin_src conf
+  bindsym $mod+Mod1+e exec emacsclient -c -a emacs -e '(dired (getenv "HOME"))'
+#+end_src
+*** Emacs
+#+begin_src conf
+  bindsym $mod+Mod1+n exec $guiemacs
+  bindsym $mod+Control+n exec $terminal -e $tuiemacs
+#+end_src
+*** File manager
+#+begin_src conf
+  bindsym $mod+e exec $file
+#+end_src
+*** Terminal
+#+begin_src conf
+  bindsym $mod+Return exec $terminal
+#+end_src
+*** Terminal + Tmux
+#+begin_src conf
+  bindsym $mod+Shift+Return exec $terminal -e tmux new -A -s main
+#+end_src
+*** Kill focueed window
+#+begin_src conf
+  bindsym $mod+Shift+F4 kill
+  bindsym Mod1+F4 kill
+#+end_src
+*** window management
+**** change focus
+The basic window navigation key.
+#+begin_src conf
+  bindsym $mod+$left focus left
+  bindsym $mod+$down focus down
+  bindsym $mod+$up focus up
+  bindsym $mod+$right focus right
+#+end_src
+Alternatively, with arrow keys:
+#+begin_src conf
+  bindsym $mod+Left focus left
+  bindsym $mod+Down focus down
+  bindsym $mod+Up focus up
+  bindsym $mod+Right focus right
+#+end_src
+Adding ALT-TAB functionality just in case.
+#+begin_src conf
+  bindsym Mod1+Tab focus right
+  bindsym Mod1+Shift+Tab focus left
+#+end_src
+**** move focused window
+Used for moving window within workspace.
+#+begin_src conf
+  bindsym $mod+Shift+$left move left
+  bindsym $mod+Shift+$down move down
+  bindsym $mod+Shift+$up move up
+  bindsym $mod+Shift+$right move right
+#+end_src
+Also, with arrow keys:
+#+begin_src conf
+  bindsym $mod+Shift+Left move left
+  bindsym $mod+Shift+Down move down
+  bindsym $mod+Shift+Up move up
+  bindsym $mod+Shift+Right move right
+#+end_src
+**** split
+horizontally
+#+begin_src conf
+  bindsym $mod+Control+h split h; exec $notify "Horizontal split"
+#+end_src
+vertically
+#+begin_src conf
+  bindsym $mod+Control+v split v exec $notify "Vertical split"
+#+end_src
+**** fullscreen toggle
+#+begin_src conf
+  bindsym $mod+f fullscreen toggle; exec $notify "Fullscreen toggle"
+#+end_src
+**** container layout
+stacked
+#+begin_src conf
+  bindsym $mod+Control+s layout stacking; exec $notify "Stacking layout"
+#+end_src
+tabbed
+#+begin_src conf
+  bindsym $mod+Control+w layout tabbed; exec $notify "Tabbed layout"
+#+end_src
+split, this is the default behavior.
+#+begin_src conf
+  bindsym $mod+Control+e layout toggle split; exec $notify "Split toggle"
+#+end_src
+**** toggle tiling / floating
+#+begin_src conf
+  bindsym $mod+Shift+space floating toggle; exec $notify "Floating toggle"
+#+end_src
+**** change focus between tiling / floating windows
+#+begin_src conf
+  bindsym $mod+space focus mode_toggle; exec $notify "Window focus toggle"
+#+end_src
+**** focus parent container
+#+begin_src conf
+  bindsym $mod+Control+a focus parent; exec $notify "Focus parent container"
+#+end_src
+**** focus child container
+#+begin_src conf
+  bindsym $mod+Control+d focus child; exec $notify "Focus child container"
+#+end_src
+**** move to scratchpad
+Move the current focused window into the scratchpad
+#+begin_src conf
+  bindsym $mod+Shift+minus move scratchpad; exec $notify "Moved to scratchpad"
+#+end_src
+**** show scratchpad
+Show the next scratchpad window or hide the focused scratchpad window. If there are multiple scratchpad windows, this command cycles through them.
+#+begin_src conf
+  bindsym $mod+minus scratchpad show; exec $notify "Show scratchpad"
+  bindsym $mod+Shift+c [class="(?i)xclipboard"] scratchpad show
+#+end_src
+*** workspace management
+#+begin_src conf
+  bindsym $mod+1 workspace $ws1
+  bindsym $mod+2 workspace $ws2
+  bindsym $mod+3 workspace $ws3
+  bindsym $mod+4 workspace $ws4
+  bindsym $mod+5 workspace $ws5
+  bindsym $mod+6 workspace $ws6
+  bindsym $mod+7 workspace $ws7
+  bindsym $mod+8 workspace $ws8
+  bindsym $mod+9 workspace $ws9
+  bindsym $mod+0 workspace $ws10
+#+end_src
+**** switch to workspace prev / next
+#+begin_src conf
+  bindsym $mod+bracketleft workspace prev
+  bindsym $mod+bracketright workspace next
+#+end_src
+**** move focused containerto workspace
+#+begin_src conf
+  bindsym $mod+Shift+1 move container to workspace $ws1
+  bindsym $mod+Shift+2 move container to workspace $ws2
+  bindsym $mod+Shift+3 move container to workspace $ws3
+  bindsym $mod+Shift+4 move container to workspace $ws4
+  bindsym $mod+Shift+5 move container to workspace $ws5
+  bindsym $mod+Shift+6 move container to workspace $ws6
+  bindsym $mod+Shift+7 move container to workspace $ws7
+  bindsym $mod+Shift+8 move container to workspace $ws8
+  bindsym $mod+Shift+9 move container to workspace $ws9
+  bindsym $mod+Shift+0 move container to workspace $ws10
+#+end_src
+**** move using bracket keys
+#+begin_src conf
+  bindsym Control+Mod1+bracketleft move to workspace previous
+  bindsym Control+Mod1+bracketright move to workspace next
+#+end_src
+**** back and forth
+#+begin_src conf
+  bindsym $mod+Tab workspace back_and_forth
+  bindsym $mod+Shift+Tab move container to workspace back_and_forth
+#+end_src
+**** switch output focus
+#+begin_src conf
+  bindsym $mod+Control+1 focus output primary
+  bindsym $mod+Control+2 focus output right
+#+end_src
+**** moving to output
+#+begin_src conf
+  bindsym $mod+Control+Shift+1 move workspace to output primary
+  bindsym $mod+Control+Shift+2 move workspace to output right
+#+end_src
+*** Reload configuration
+#+begin_src conf
+  bindsym $mod+Shift+F11 reload
+#+end_src
+*** modes
+**** resize
+This only work in floating mode.
+#+begin_src conf
+  # resize window (you can also use the mouse for that)
+  mode "resize" {
+  # These bindings trigger as soon as you enter the resize mode
+
+  # Pressing left will shrink the window’s width.
+  # Pressing right will grow the window’s width.
+  # Pressing up will shrink the window’s height.
+  # Pressing down will grow the window’s height.
+  bindsym $left       resize shrink width 10 px or 10 ppt
+  bindsym $down       resize grow height 10 px or 10 ppt
+  bindsym $up         resize shrink height 10 px or 10 ppt
+  bindsym $right      resize grow width 10 px or 10 ppt
+
+  # same bindings, but for the arrow keys
+  bindsym Left        resize shrink width 10 px or 10 ppt
+  bindsym Down        resize grow height 10 px or 10 ppt
+  bindsym Up          resize shrink height 10 px or 10 ppt
+  bindsym Right       resize grow width 10 px or 10 ppt
+
+  # back to normal: Enter or Escape or $mod+r
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+  bindsym $mod+r mode "default"
+  }
+
+  bindsym $mod+r mode "resize"
+#+end_src
+
+*** Exit sway
+#+begin_src conf
+    bindsym $mod+q exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+#+end_src
+** Bar
+#+begin_src conf
+  bar {
+      position top
+
+      # When the status_command prints a new line to stdout, swaybar updates.
+      # The default just shows the current date and time.
+      status_command while date +'%Y-%m-%d %X'; do sleep 1; done
+
+      colors {
+          statusline #ffffff
+          background #323232
+          inactive_workspace #32323200 #32323200 #5c5c5c
+      }
+  }
+#+end_src
+** Window rules
+*** borderless
+#+begin_src conf
+  for_window [class=".*"] border pixel 0
+#+end_src
+** Include system configuration
+#+begin_src conf
+  include /etc/sway/config.d/*
+#+end_src
+* Scripts
+** grimshot
+:PROPERTIES:
+:header-args: :tangle ./.local/bin/grimshot :mkdirp t :shebang #!/bin/sh
+:END:
+This is taken from [[https://github.com/OctopusET/sway-contrib/blob/master/grimshot/grimshot][sway-contrib]].
+#+begin_src sh
+  ## Grimshot: a helper for screenshots within sway
+  ## Requirements:
+  ##  - `grim`: screenshot utility for wayland
+  ##  - `slurp`: to select an area
+  ##  - `swaymsg`: to read properties of current window
+  ##  - `wl-copy`: clipboard utility
+  ##  - `jq`: json utility to parse swaymsg output
+  ##  - `notify-send`: to show notifications
+  ## Those are needed to be installed, if unsure, run `grimshot check`
+  ##
+  ## See `man 1 grimshot` or `grimshot usage` for further details.
+
+  when() {
+    condition=$1
+    action=$2
+
+    if eval "$condition"; then
+      eval "$action"
+    fi
+  }
+
+  whenOtherwise() {
+    condition=$1
+    true_action=$2
+    false_action=$3
+
+    if eval "$condition"; then
+      eval "$true_action"
+    else
+      eval "$false_action"
+    fi
+  }
+
+  any() {
+    for tuple in "$@"; do
+      condition=$(echo "$tuple" | cut -d: -f1)
+      action=$(echo "$tuple" | cut -d: -f2-)
+      if eval "$condition"; then
+        eval "$action"
+        return 0
+      fi
+    done
+    return 1  # No conditions matched
+  }
+
+  NOTIFY=no
+  CURSOR=
+  WAIT=no
+
+  getTargetDirectory() {
+    test -f "${XDG_CONFIG_HOME:-$HOME/.config}/user-dirs.dirs" &&
+      . "${XDG_CONFIG_HOME:-$HOME/.config}/user-dirs.dirs"
+
+    echo "${XDG_SCREENSHOTS_DIR:-${XDG_PICTURES_DIR:-$HOME}}"
+  }
+
+  parseArgs() {
+    POSITIONAL_ARGS=""
+
+    while [ $# -gt 0 ]; do
+      case "$1" in
+      -n | --notify)
+        NOTIFY=yes
+        shift
+        ;;
+      -c | --cursor)
+        CURSOR=yes
+        shift
+        ;;
+      -w | --wait)
+        shift
+        WAIT="$1"
+        if echo "$WAIT" | grep "[^0-9]" -q; then
+          echo "invalid value for wait '$WAIT'" >&2
+          exit 3
+        fi
+        shift
+        ;;
+      ,*)                                      # Treat anything else as a positional argument
+        POSITIONAL_ARGS="$POSITIONAL_ARGS $1" # Add positional argument to the string
+        shift
+        ;;
+      esac
+    done
+
+    set -- $POSITIONAL_ARGS # Re-assign positional arguments
+    ACTION=${1:-usage}
+    SUBJECT=${2:-screen}
+    FILE=${3:-$(getTargetDirectory)/$(date -Ins).png}
+
+  }
+
+  printUsageMsg() {
+    echo "Usage:"
+    echo "  grimshot [--notify] [--cursor] [--wait N] (copy|save) [active|screen|output|area|window|anything] [FILE|-]"
+    echo "  grimshot check"
+    echo "  grimshot usage"
+    echo ""
+    echo "Commands:"
+    echo "  copy: Copy the screenshot data into the clipboard."
+    echo "  save: Save the screenshot to a regular file or '-' to pipe to STDOUT."
+    echo "  savecopy: Save the screenshot to a regular file and copy the data into the clipboard."
+    echo "  check: Verify if required tools are installed and exit."
+    echo "  usage: Show this message and exit."
+    echo ""
+    echo "Targets:"
+    echo "  active: Currently active window."
+    echo "  screen: All visible outputs."
+    echo "  output: Currently active output."
+    echo "  area: Manually select a region."
+    echo "  window: Manually select a window."
+    echo "  anything: Manually select an area, window, or output."
+    exit
+  }
+
+  notify() {
+    notify-send -t 3000 -a grimshot "$@"
+  }
+
+  notifyOk() {
+    notify_disabled='[ "$NOTIFY" = "no" ]'
+    action_involves_saving='[ "$ACTION" = "save" ] || [ "$ACTION" = "savecopy" ]'
+
+    if eval $notify_disabled; then
+  	  return
+    fi
+
+    TITLE=${2:-"Screenshot"}
+    MESSAGE=${1:-"OK"}
+
+    whenOtherwise "$action_involves_saving" \
+      'notify "$TITLE" "$MESSAGE" -i "$FILE"' \
+      'notify "$TITLE" "$MESSAGE"'
+  }
+
+  notifyError() {
+    notify_enabled='[ "$NOTIFY" = "yes" ]'
+    TITLE=${2:-"Screenshot"}
+    errorMssg=$1
+    MESSAGE=${errorMssg:-"Error taking screenshot with grim"}
+
+    whenOtherwise "$notify_enabled" \
+      'notify "$TITLE" "$MESSAGE" -u critical' \
+      'echo "$errorMssg"'
+  }
+
+  die() {
+    MSG=${1:-Bye}
+    notifyError "Error: $MSG"
+    exit 2
+  }
+
+  check() {
+    COMMAND=$1
+    command_exists='command -v "$COMMAND" > /dev/null 2>&1'
+
+    whenOtherwise "$command_exists" \
+      'RESULT="OK"' \
+      'RESULT="NOT FOUND"'
+
+    echo "   $COMMAND: $RESULT"
+  }
+
+  takeScreenshot() {
+    FILE=$1
+    GEOM=$2
+    OUTPUT=$3
+
+    output_provided='[ -n "$OUTPUT" ]'
+    geom_not_provided='[ -z "$GEOM" ]'
+
+    output_action='grim ${CURSOR:+-c} -o "$OUTPUT" "$FILE" || die "Unable to invoke grim"'
+    full_screenshot_action='grim ${CURSOR:+-c} "$FILE" || die "Unable to invoke grim"'
+    geometry_screenshot_action='grim ${CURSOR:+-c} -g "$GEOM" "$FILE" || die "Unable to invoke grim"'
+
+    any \
+      "$output_provided:$output_action" \
+      "$geom_not_provided:$full_screenshot_action" \
+      "true:$geometry_screenshot_action"
+  }
+  checkRequiredTools() {
+    echo "Checking if required tools are installed. If something is missing, install it to your system and make it available in PATH..."
+    check grim
+    check slurp
+    check swaymsg
+    check wl-copy
+    check jq
+    check notify-send
+    exit
+  }
+
+  selectArea() {
+    GEOM=$(slurp -d)
+    geomIsEmpty='[ -z "$GEOM" ]'
+    when "$geomIsEmpty" "exit 1"
+    WHAT="Area"
+  }
+
+  selectActiveWindow() {
+    FOCUSED=$(swaymsg -t get_tree | jq -r 'recurse(.nodes[]?, .floating_nodes[]?) | select(.focused)')
+    GEOM=$(echo "$FOCUSED" | jq -r '.rect | "\(.x),\(.y) \(.width)x\(.height)"')
+    APP_ID=$(echo "$FOCUSED" | jq -r '.app_id')
+    WHAT="$APP_ID window"
+  }
+
+  selectScreen() {
+    GEOM=""
+    WHAT="Screen"
+  }
+
+  selectOutput() {
+    GEOM=""
+    OUTPUT=$(swaymsg -t get_outputs | jq -r '.[] | select(.focused)' | jq -r '.name')
+    WHAT="$OUTPUT"
+  }
+
+  selectWindow() {
+    GEOM=$(swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | slurp -r)
+    geomIsEmpty='[ -z "$GEOM" ]'
+    when "$geomIsEmpty" "exit 1"
+    WHAT="Window"
+  }
+
+  selectAnything() {
+    GEOM=$(swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | slurp -o)
+    geomIsEmpty='[ -z "$GEOM" ]'
+    when "$geomIsEmpty" "exit 1"
+    WHAT="Selection"
+  }
+  handleSaveCopy() {
+    wl-copy --type image/png <"$FILE" || die "Clipboard error"
+    MESSAGE="$MESSAGE and clipboard"
+  }
+
+  handleScreenshotSuccess() {
+    TITLE="Screenshot of $SUBJECT"
+    MESSAGE=$(basename "$FILE")
+    isSaveCopy='[ "$ACTION" = "savecopy" ]'
+    when "$isSaveCopy" "handleSaveCopy"
+    notifyOk "$MESSAGE" "$TITLE"
+    echo "$FILE"
+  }
+
+  handleScreenshotFailure() {
+    notifyError "Error taking screenshot with grim"
+  }
+
+  handleCopy() {
+    takeScreenshot - "$GEOM" "$OUTPUT" | wl-copy --type image/png || die "Clipboard error"
+    notifyOk "$WHAT copied to clipboard"
+  }
+
+  handleSave() {
+    screenshotTaken="takeScreenshot \"$FILE\" \"$GEOM\" \"$OUTPUT\""
+    whenOtherwise "$screenshotTaken" \
+      "handleScreenshotSuccess" \
+      "handleScreenshotFailure"
+  }
+  handleUnknownSubject() {
+    die "Unknown subject to take a screenshot from" "$SUBJECT"
+  }
+  handleScreenshot() {
+    actionIsInvalid='[ "$ACTION" != "save" ] && [ "$ACTION" != "copy" ] && [ "$ACTION" != "savecopy" ] && [ "$ACTION" != "check" ]'
+    actionIsCheck='[ "$ACTION" = "check" ]'
+    subjectIsArea='[ "$SUBJECT" = "area" ]'
+    subjectIsActiveWindow='[ "$SUBJECT" = "active" ]'
+    subjectIsScreen='[ "$SUBJECT" = "screen" ]'
+    subjectIsOutput='[ "$SUBJECT" = "output" ]'
+    subjectIsWindow='[ "$SUBJECT" = "window" ]'
+    subjectIsAnything='[ "$SUBJECT" = "anything" ]'
+    subjectIsUnknown=true
+    any \
+      "$actionIsInvalid:printUsageMsg" \
+      "$actionIsCheck:checkRequiredTools" \
+      "$subjectIsArea:selectArea" \
+      "$subjectIsActiveWindow:selectActiveWindow" \
+      "$subjectIsScreen:selectScreen" \
+      "$subjectIsOutput:selectOutput" \
+      "$subjectIsWindow:selectWindow" \
+      "$subjectIsAnything:selectAnything" \
+      "$subjectIsUnknown:handleUnknownSubject"
+
+    wait='[ "$WAIT" != "no" ]'
+    when "$wait" "sleep $WAIT"
+
+    actionIsCopy='[ "$ACTION" = "copy" ]'
+
+    whenOtherwise "$actionIsCopy" \
+      "handleCopy" \
+      "handleSave"
+  }
+
+  parseArgs "$@"
+  handleScreenshot
+#+end_src
