@@ -278,7 +278,7 @@ I will start from the default (on /archlinux/ it's provided in the package, and 
   # Your preferred terminal emulator
   set $terminal alacritty
   # Your preferred application launcher
-  set $menu wmenu-run
+  set $menu wofi --show drun
 
   set $mail thunderbird
   set $browser firefox
