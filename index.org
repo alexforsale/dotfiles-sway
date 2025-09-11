@@ -352,7 +352,7 @@ I will start from the default (on /archlinux/ it's provided in the package, and 
 ** Keybinding
 *** Menu
 #+begin_src conf
-  bindsym $mod+d $menu
+  bindsym $mod+d exec $menu
 #+end_src
 *** Media keys
 #+begin_src conf
