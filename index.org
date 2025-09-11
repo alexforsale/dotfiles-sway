@@ -300,30 +300,30 @@ I will start from the default (on /archlinux/ it's provided in the package, and 
 #+end_src
 ** Colorscheme
 #+begin_src conf
-  set $color0  #073642
-  set $color1  #dc322f
-  set $color2  #859900
-  set $color3  #b58900
-  set $color4  #268bd2
-  set $color5  #d33682
-  set $color6  #2aa198
-  set $color7  #eee8d5
-  set $color8  #6c7c80
-  set $color9  #dc322f
-  set $color10  #859900
-  set $color11  #b58900
-  set $color12  #268bd2
-  set $color13  #d33682
-  set $color14  #2aa198
-  set $color15  #eee8d5
+  set $color00  #2e3440
+  set $color01  #3b4252
+  set $color02  #434c5e
+  set $color03  #4c566a
+  set $color04  #d8dee9
+  set $color05  #e5e9f0
+  set $color06  #eceff4
+  set $color07  #8fbcbb
+  set $color08  #88c0d0
+  set $color09  #81a1c1
+  set $color10  #5e81ac
+  set $color11  #bf616a
+  set $color12  #d08770
+  set $color13  #ebcb8b
+  set $color14  #a3be8c
+  set $color15  #b48ead
 
-  set $foreground $color7
-  set $background $color0
+  set $foreground $color07
+  set $background $color00
 #+end_src
 
 #+begin_src conf
-  client.focused            $foreground  $color8      $foreground $background $background
-  client.unfocused          $color8      $background  $foreground $background $background
+  client.focused            $foreground  $background  $foreground $background $background
+  client.unfocused          $foreground  $background  $foreground $background $background
   client.focused_inactive   $foreground  $background  $foreground $background $background
   client.urgent             $foreground  $background  $foreground $background $background
   client.placeholder        $foreground  $background  $foreground $background $background
@@ -607,14 +607,25 @@ This only work in floating mode.
   bar {
       position top
 
+      wrap_scroll yes
+  	mode dock
+  	font pango:JetBrainsMonoNL Nerd Font Mono 6 
+  	tray_output *
+  	icon_theme Papirus
       # When the status_command prints a new line to stdout, swaybar updates.
       # The default just shows the current date and time.
       status_command while date +'%Y-%m-%d %X'; do sleep 1; done
 
       colors {
-          statusline #ffffff
-          background #323232
-          inactive_workspace #32323200 #32323200 #5c5c5c
+          statusline $color04
+          background $color01
+  		separator $color03
+  		#                  Border    #background #text
+          focused_workspace  $color02  $color03    $color06
+          inactive_workspace $color01  $color01    $color06
+          active_workspace   $color00  $color00    $color01
+          urgent_workspace   $color01  $color01    $color11
+          binding_mode       $color01  $color01    $color14
       }
   }
 #+end_src
