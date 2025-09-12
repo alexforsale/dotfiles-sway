@@ -376,13 +376,17 @@ I will start from the default (on /archlinux/ it's provided in the package, and 
   bindsym XF86MyComputer exec $browser
 #+end_src
 *** Screenshot
-Pressing the ~Print~ key will capture the screen, save it to =~/Picture/Screenshots/~= and also add it to the copy buffer.
+Pressing the ~Print~ key will capture the screen, save it to =~/Picture/Screenshots/= and also add it to the copy buffer.
 #+begin_src conf
   bindsym Print exec grimshot --notify savecopy screen "${HOME}/Pictures/Screenshots/grimshot-$(date +%Y-%m-%d_%H_%M_%S).png"
 #+end_src
-Also set it to ~$mod+Shift+s~ simulating the windows keybinding.
-#+begin_src
-  bindsym $mod+Shift+s exec grimshot --notify savecopy screen "${HOME}/Pictures/Screenshots/grimshot-$(date +%Y-%m-%d_%H_%M_%S).png"
+Using ~Alt+Print~ key will capture selected area, save it to =~/Pictures/Screenshots/= and also add it to the copy buffer.
+#+begin_src conf
+  bindsym Mod1+Print exec grimshot --notify savecopy area "${HOME}/Pictures/Screenshots/grimshot-$(date +%Y-%m-%d_%H_%M_%S).png"
+#+end_src
+Also set it to ~$mod+Shift+s~ simulating the windows keybinding (but save it to clipboard).
+#+begin_src conf
+  bindsym $mod+Shift+S exec grimshot --notify savecopy area "${HOME}/Pictures/Screenshots/grimshot-$(date +%Y-%m-%d_%H_%M_%S).png"
 #+end_src
 *** Browser
 #+begin_src conf
