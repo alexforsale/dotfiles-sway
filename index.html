@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2025-07-27 Sun 15:17 -->
+<!-- 2025-09-17 Wed 10:13 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Sway Configuration</title>
@@ -11,12 +11,14 @@
 <meta name="generator" content="Org Mode" />
 <link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/htmlize.css"/>
 <link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/readtheorg.css"/>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/code-copy.css"/>
 <link rel="stylesheet" type="text/css" href="src/readtheorg_theme/css/search.css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
 <script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/search.js"></script>
 <script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/code-copy.js"></script>
 <style> #content{max-width:1800px;}</style>
 <style> p{max-width:800px;}</style>
 <style> li{max-width:800px;}</style>
@@ -28,14 +30,130 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org5eb07a4">Sway</a></li>
-<li><a href="#org4502e63">The configuration.</a></li>
+<li><a href="#orgee81314">Sway</a>
+<ul>
+<li><a href="#org3db0cd8">Dependencies</a></li>
+</ul>
+</li>
+<li><a href="#orga3b9b33">The configuration.</a></li>
+<li><a href="#orgbe7a5eb">Replicating my i3 config</a>
+<ul>
+<li><a href="#orgf21de40">Variables</a></li>
+<li><a href="#orgb5ca096">Colorscheme</a></li>
+<li><a href="#org427aaca">Output</a></li>
+<li><a href="#orge6602fc">Gaps</a></li>
+<li><a href="#orgf736b52">Font</a></li>
+<li><a href="#orge4a4066">Application Autostart</a></li>
+<li><a href="#org84a5e22">Colors</a></li>
+<li><a href="#org999dce0">Keybinding</a>
+<ul>
+<li><a href="#org40044d7">Menu</a></li>
+<li><a href="#org4b9c80f">Audio</a></li>
+<li><a href="#org7240ad0">Media keys</a></li>
+<li><a href="#orga936f8a">Screenshot</a></li>
+<li><a href="#orgfce4b85">Browser</a></li>
+<li><a href="#org2f7199b">Music player</a></li>
+<li><a href="#org6af0cee">Vim</a></li>
+<li><a href="#orgb0b7d33">Dired</a></li>
+<li><a href="#org675f69c">Emacs</a></li>
+<li><a href="#org85dc693">File manager</a></li>
+<li><a href="#orga02e631">Terminal</a></li>
+<li><a href="#org2df37df">Terminal + Tmux</a></li>
+<li><a href="#orgf87bb42">Kill focueed window</a></li>
+<li><a href="#orgd07f39f">window management</a>
+<ul>
+<li><a href="#org479831a">change focus</a></li>
+<li><a href="#orgb20b0f1">move focused window</a></li>
+<li><a href="#org497a2e6">split</a></li>
+<li><a href="#orgf0220d5">fullscreen toggle</a></li>
+<li><a href="#org94c82e5">container layout</a></li>
+<li><a href="#orgdc05acb">toggle tiling / floating</a></li>
+<li><a href="#org7a5529f">change focus between tiling / floating windows</a></li>
+<li><a href="#orgd1ac937">focus parent container</a></li>
+<li><a href="#orgccad562">focus child container</a></li>
+<li><a href="#orgddea54c">move to scratchpad</a></li>
+<li><a href="#org5799bb6">show scratchpad</a></li>
+</ul>
+</li>
+<li><a href="#org1040ffa">workspace management</a>
+<ul>
+<li><a href="#org6e2c6de">switch to workspace prev / next</a></li>
+<li><a href="#org22dc7e0">move focused containerto workspace</a></li>
+<li><a href="#org845b88d">move using bracket keys</a></li>
+<li><a href="#org509b964">back and forth</a></li>
+<li><a href="#orga39e60c">switch output focus</a></li>
+<li><a href="#org9016eee">moving to output</a></li>
+</ul>
+</li>
+<li><a href="#orgceed5e1">Reload configuration</a></li>
+<li><a href="#org85f50d0">modes</a>
+<ul>
+<li><a href="#org40f5a8b">resize</a></li>
+</ul>
+</li>
+<li><a href="#org0115b59">Exit sway</a></li>
+</ul>
+</li>
+<li><a href="#org15cb168">Bar</a></li>
+<li><a href="#org22d8d37">Window rules</a>
+<ul>
+<li><a href="#orgd54db0d">Audio</a></li>
+<li><a href="#orgfb50afd">anki</a></li>
+<li><a href="#org1d8ac6a">borderless</a></li>
+<li><a href="#orgaee5f6b">cheese</a></li>
+<li><a href="#org9d62315">easyeffects</a></li>
+<li><a href="#org36e7ee4">floating dialog window</a></li>
+<li><a href="#orgf9766c3">gvim</a></li>
+<li><a href="#org81e2c2b">htop</a></li>
+<li><a href="#org9777361">kdeconnect</a></li>
+<li><a href="#orga1e35ce">khal</a></li>
+<li><a href="#org46ac9f4">ncmpcpp</a></li>
+<li><a href="#org926c6f5">OBS</a></li>
+<li><a href="#org00c816d">polkit</a></li>
+<li><a href="#org34fb66e">screenkey</a></li>
+<li><a href="#org99c7298">Steam</a></li>
+<li><a href="#org9587c37">thunderbird</a></li>
+<li><a href="#orgbcaa3cd">transmission</a></li>
+<li><a href="#org458d146">vim</a></li>
+<li><a href="#org9c24b40">virt-manager</a></li>
+</ul>
+</li>
+<li><a href="#orge82a74d">Workspace assignment</a>
+<ul>
+<li><a href="#org18eabb9">workspace 3</a></li>
+<li><a href="#org8b90834">workspace 4</a></li>
+<li><a href="#orga7652df">workspace 5</a></li>
+<li><a href="#org1f5747b">workspace 6</a></li>
+<li><a href="#org5f48abb">workspace 7</a></li>
+<li><a href="#org1e07404">workspace 8</a></li>
+<li><a href="#orgb45c8f8">workspace 10</a></li>
+</ul>
+</li>
+<li><a href="#orga4eed6d">Include system configuration</a></li>
+</ul>
+</li>
+<li><a href="#org9816fe6">Wofi</a>
+<ul>
+<li><a href="#orgc307c4d">config</a></li>
+<li><a href="#orgc7cb61d">style</a></li>
+</ul>
+</li>
+<li><a href="#org450bc39">Mako</a>
+<ul>
+<li><a href="#org018a25b">config</a></li>
+</ul>
+</li>
+<li><a href="#orgfd37e48">Scripts</a>
+<ul>
+<li><a href="#orgd1fa54e">grimshot</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org5eb07a4" class="outline-2">
-<h2 id="org5eb07a4">Sway</h2>
-<div class="outline-text-2" id="text-org5eb07a4">
+<div id="outline-container-orgee81314" class="outline-2">
+<h2 id="orgee81314">Sway</h2>
+<div class="outline-text-2" id="text-orgee81314">
 <p>
 This is my personal <i>sway</i> window manager configuration. The aim is:
 </p>
@@ -44,15 +162,26 @@ This is my personal <i>sway</i> window manager configuration. The aim is:
 <dt>Use the default application</dt><dd>When possible, that is.</dd>
 </dl>
 </div>
+<div id="outline-container-org3db0cd8" class="outline-3">
+<h3 id="org3db0cd8">Dependencies</h3>
+<div class="outline-text-3" id="text-org3db0cd8">
+<dl class="org-dl">
+<dt>Nerd Fonts</dt><dd>Get them from <a href="https://www.nerdfonts.com/">here</a>.</dd>
+<dt>Polkit-Kde-Agent</dt><dd>Polkit is used for controlling system-wide privileges.</dd>
+<dt>wl-clipboard</dt><dd>provides <code>wl-copy</code> and <code>wl-paste</code> command.</dd>
+<dt>pwvucontrol</dt><dd>Pipewire volume control.</dd>
+</dl>
 </div>
-<div id="outline-container-org4502e63" class="outline-2">
-<h2 id="org4502e63">The configuration.</h2>
-<div class="outline-text-2" id="text-org4502e63">
+</div>
+</div>
+<div id="outline-container-orga3b9b33" class="outline-2">
+<h2 id="orga3b9b33">The configuration.</h2>
+<div class="outline-text-2" id="text-orga3b9b33">
 <p>
 I will start from the default (on <i>archlinux</i> it's provided in the package, and can be found on <code>/etc/sway/config</code>)
 </p>
 <div class="org-src-container">
-<pre class="src src-conf" id="orgd6c7911"><span style="color: #b22222;"># </span><span style="color: #b22222;">Default config for sway
+<pre class="src src-conf" id="org51b1333"><span style="color: #b22222;"># </span><span style="color: #b22222;">Default config for sway
 </span><span style="color: #b22222;">#</span><span style="color: #b22222;">
 </span><span style="color: #b22222;"># </span><span style="color: #b22222;">Copy this to ~/.config/sway/config and edit it to your liking.
 </span><span style="color: #b22222;">#</span><span style="color: #b22222;">
@@ -288,10 +417,1424 @@ include /etc/sway/config.d/*
 </div>
 
 
-<div id="org6b4b2c9" class="figure">
+<div id="org0b6b5cc" class="figure">
 <p><img src="./assets/img/default-look.png" alt="default-look.png" />
 </p>
 <p><span class="figure-number">Figure 1: </span>The default sway</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgbe7a5eb" class="outline-2">
+<h2 id="orgbe7a5eb">Replicating my i3 config</h2>
+<div class="outline-text-2" id="text-orgbe7a5eb">
+</div>
+<div id="outline-container-orgf21de40" class="outline-3">
+<h3 id="orgf21de40">Variables</h3>
+<div class="outline-text-3" id="text-orgf21de40">
+<div class="org-src-container">
+<pre class="src src-conf">set $mod Mod4
+<span style="color: #b22222;"># </span><span style="color: #b22222;">Home row direction keys, like vim
+</span>set $left h
+set $down j
+set $up k
+set $right l
+<span style="color: #b22222;"># </span><span style="color: #b22222;">Your preferred terminal emulator
+</span>set $terminal alacritty
+<span style="color: #b22222;"># </span><span style="color: #b22222;">Your preferred application launcher
+</span>set $menu wofi --show drun
+
+set $mail thunderbird
+set $browser firefox
+set $file thunar
+set $guiemacs emacsclient -c -a emacs
+set $tuiemacs emacsclient -t -a emacs
+set $notify exec notify-send -t 1000
+
+set $ws1 <span style="color: #bc8f8f;">"1: Term"</span>
+set $ws2 <span style="color: #bc8f8f;">"2: Code"</span>
+set $ws3 <span style="color: #bc8f8f;">"3: Web"</span>
+set $ws4 <span style="color: #bc8f8f;">"4: Mail"</span>
+set $ws5 <span style="color: #bc8f8f;">"5: File"</span>
+set $ws6 <span style="color: #bc8f8f;">"6: Office"</span>
+set $ws7 <span style="color: #bc8f8f;">"7: Others"</span>
+set $ws8 <span style="color: #bc8f8f;">"8: Media"</span>
+set $ws9 <span style="color: #bc8f8f;">"9: Remote"</span>
+set $ws10 <span style="color: #bc8f8f;">"10: Steam"</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb5ca096" class="outline-3">
+<h3 id="orgb5ca096">Colorscheme</h3>
+<div class="outline-text-3" id="text-orgb5ca096">
+<div class="org-src-container">
+<pre class="src src-conf">set $color00  <span style="color: #b22222;">#</span><span style="color: #b22222;">2e3440
+</span>set $color01  <span style="color: #b22222;">#</span><span style="color: #b22222;">3b4252
+</span>set $color02  <span style="color: #b22222;">#</span><span style="color: #b22222;">434c5e
+</span>set $color03  <span style="color: #b22222;">#</span><span style="color: #b22222;">4c566a
+</span>set $color04  <span style="color: #b22222;">#</span><span style="color: #b22222;">d8dee9
+</span>set $color05  <span style="color: #b22222;">#</span><span style="color: #b22222;">e5e9f0
+</span>set $color06  <span style="color: #b22222;">#</span><span style="color: #b22222;">eceff4
+</span>set $color07  <span style="color: #b22222;">#</span><span style="color: #b22222;">8fbcbb
+</span>set $color08  <span style="color: #b22222;">#</span><span style="color: #b22222;">88c0d0
+</span>set $color09  <span style="color: #b22222;">#</span><span style="color: #b22222;">81a1c1
+</span>set $color10  <span style="color: #b22222;">#</span><span style="color: #b22222;">5e81ac
+</span>set $color11  <span style="color: #b22222;">#</span><span style="color: #b22222;">bf616a
+</span>set $color12  <span style="color: #b22222;">#</span><span style="color: #b22222;">d08770
+</span>set $color13  <span style="color: #b22222;">#</span><span style="color: #b22222;">ebcb8b
+</span>set $color14  <span style="color: #b22222;">#</span><span style="color: #b22222;">a3be8c
+</span>set $color15  <span style="color: #b22222;">#</span><span style="color: #b22222;">b48ead
+</span>
+set $foreground $color07
+set $background $color00
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org427aaca" class="outline-3">
+<h3 id="org427aaca">Output</h3>
+<div class="outline-text-3" id="text-org427aaca">
+<div class="org-src-container">
+<pre class="src src-conf">output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orge6602fc" class="outline-3">
+<h3 id="orge6602fc">Gaps</h3>
+<div class="outline-text-3" id="text-orge6602fc">
+<div class="org-src-container">
+<pre class="src src-conf">gaps inner 8px
+gaps outer 8px
+smart_gaps on
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf736b52" class="outline-3">
+<h3 id="orgf736b52">Font</h3>
+<div class="outline-text-3" id="text-orgf736b52">
+<div class="org-src-container">
+<pre class="src src-conf">font pango:JetBrainsMonoNL Nerd Font Mono 8
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orge4a4066" class="outline-3">
+<h3 id="orge4a4066">Application Autostart</h3>
+<div class="outline-text-3" id="text-orge4a4066">
+<div class="org-src-container">
+<pre class="src src-conf">exec systemctl --user import-environment WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP SWAYSOCK I3SOCK XCURSOR_SIZE XCURSOR_THEME QT_QPA_PLATFORMTHEME SSH_AUTH_SOCK
+exec dbus-update-activation-environment --systemd --all &amp;
+exec /usr/lib/polkit-kde-authentication-agent-1 &amp;
+<span style="color: #b8860b;">exec gnome-keyring-daemon --components</span>=pkcs11,secrets,ssh -r -d &amp;
+exec wl-paste --type text --watch cliphist store &amp;
+exec wl-paste --type image --watch cliphist store &amp;
+exec /usr/bin/kdeconnectd
+exec mako
+exec $terminal --class ncmpcpp -e ncmpcpp
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org84a5e22" class="outline-3">
+<h3 id="org84a5e22">Colors</h3>
+<div class="outline-text-3" id="text-org84a5e22">
+<div class="org-src-container">
+<pre class="src src-conf">client.focused            $foreground  $background  $foreground $background $background
+client.unfocused          $foreground  $background  $foreground $background $background
+client.focused_inactive   $foreground  $background  $foreground $background $background
+client.urgent             $foreground  $background  $foreground $background $background
+client.placeholder        $foreground  $background  $foreground $background $background
+client.focused_tab_title  $foreground  $background  $foreground $background $background
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org999dce0" class="outline-3">
+<h3 id="org999dce0">Keybinding</h3>
+<div class="outline-text-3" id="text-org999dce0">
+</div>
+<div id="outline-container-org40044d7" class="outline-4">
+<h4 id="org40044d7">Menu</h4>
+<div class="outline-text-4" id="text-org40044d7">
+<div class="org-src-container">
+<pre class="src src-conf">bindsym $mod+d exec $menu
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org4b9c80f" class="outline-4">
+<h4 id="org4b9c80f">Audio</h4>
+<div class="outline-text-4" id="text-org4b9c80f">
+<div class="org-src-container">
+<pre class="src src-conf">bindsym $mod+v exec pwvucontrol
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org7240ad0" class="outline-4">
+<h4 id="org7240ad0">Media keys</h4>
+<div class="outline-text-4" id="text-org7240ad0">
+<div class="org-src-container">
+<pre class="src src-conf"><span style="color: #b22222;"># </span><span style="color: #b22222;">Special keys to adjust volume via PulseAudio
+</span>bindsym --locked XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
+bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
+bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
+bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
+<span style="color: #b22222;"># </span><span style="color: #b22222;">Special keys to adjust brightness via brightnessctl
+</span>bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
+bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
+<span style="color: #b22222;"># </span><span style="color: #b22222;">Special key to take a screenshot with grim
+</span>
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
+bindsym XF86Mail exec $mail
+bindsym $mod+Mod1+t exec $mail
+
+bindsym XF86MyComputer exec $browser
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orga936f8a" class="outline-4">
+<h4 id="orga936f8a">Screenshot</h4>
+<div class="outline-text-4" id="text-orga936f8a">
+<p>
+Pressing the <code>Print</code> key will capture the screen, save it to <code>~/Picture/Screenshots/</code> and also add it to the copy buffer.
+</p>
+<div class="org-src-container">
+<pre class="src src-conf">bindsym Print exec grimshot --notify savecopy screen <span style="color: #bc8f8f;">"${HOME}/Pictures/Screenshots/grimshot-$(date +%Y-%m-%d_%H_%M_%S).png"</span>
+</pre>
+</div>
+<p>
+Using <code>Alt+Print</code> key will capture selected area, save it to <code>~/Pictures/Screenshots/</code> and also add it to the copy buffer.
+</p>
+<div class="org-src-container">
+<pre class="src src-conf">bindsym Mod1+Print exec grimshot --notify savecopy area <span style="color: #bc8f8f;">"${HOME}/Pictures/Screenshots/grimshot-$(date +%Y-%m-%d_%H_%M_%S).png"</span>
+</pre>
+</div>
+<p>
+Also set it to <code>$mod+Shift+s</code> simulating the windows keybinding (but save it to clipboard).
+</p>
+<div class="org-src-container">
+<pre class="src src-conf">bindsym $mod+Shift+S exec grimshot --notify savecopy area <span style="color: #bc8f8f;">"${HOME}/Pictures/Screenshots/grimshot-$(date +%Y-%m-%d_%H_%M_%S).png"</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgfce4b85" class="outline-4">
+<h4 id="orgfce4b85">Browser</h4>
+<div class="outline-text-4" id="text-orgfce4b85">
+<div class="org-src-container">
+<pre class="src src-conf">bindsym $mod+Mod1+f exec $browser
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org2f7199b" class="outline-4">
+<h4 id="org2f7199b">Music player</h4>
+<div class="outline-text-4" id="text-org2f7199b">
+<div class="org-src-container">
+<pre class="src src-conf">bindsym $mod+Mod1+m exec $terminal --class ncmpcpp -e ncmpcpp
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org6af0cee" class="outline-4">
+<h4 id="org6af0cee">Vim</h4>
+<div class="outline-text-4" id="text-org6af0cee">
+<div class="org-src-container">
+<pre class="src src-conf">bindsym $mod+Mod1+v exec $terminal --class nvim -e nvim
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb0b7d33" class="outline-4">
+<h4 id="orgb0b7d33">Dired</h4>
+<div class="outline-text-4" id="text-orgb0b7d33">
+<div class="org-src-container">
+<pre class="src src-conf">bindsym $mod+Mod1+e exec emacsclient -c -a emacs -e <span style="color: #bc8f8f;">'(dired (getenv "HOME"))'</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org675f69c" class="outline-4">
+<h4 id="org675f69c">Emacs</h4>
+<div class="outline-text-4" id="text-org675f69c">
+<div class="org-src-container">
+<pre class="src src-conf">bindsym $mod+Mod1+n exec $guiemacs
+bindsym $mod+Control+n exec $terminal -e $tuiemacs
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org85dc693" class="outline-4">
+<h4 id="org85dc693">File manager</h4>
+<div class="outline-text-4" id="text-org85dc693">
+<div class="org-src-container">
+<pre class="src src-conf">bindsym $mod+e exec $file
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orga02e631" class="outline-4">
+<h4 id="orga02e631">Terminal</h4>
+<div class="outline-text-4" id="text-orga02e631">
+<div class="org-src-container">
+<pre class="src src-conf">bindsym $mod+Return exec $terminal
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org2df37df" class="outline-4">
+<h4 id="org2df37df">Terminal + Tmux</h4>
+<div class="outline-text-4" id="text-org2df37df">
+<div class="org-src-container">
+<pre class="src src-conf">bindsym $mod+Shift+Return exec $terminal -e tmux new -A -s main
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf87bb42" class="outline-4">
+<h4 id="orgf87bb42">Kill focueed window</h4>
+<div class="outline-text-4" id="text-orgf87bb42">
+<div class="org-src-container">
+<pre class="src src-conf">bindsym $mod+Shift+F4 kill
+bindsym Mod1+F4 kill
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgd07f39f" class="outline-4">
+<h4 id="orgd07f39f">window management</h4>
+<div class="outline-text-4" id="text-orgd07f39f">
+</div>
+<div id="outline-container-org479831a" class="outline-5">
+<h5 id="org479831a">change focus</h5>
+<div class="outline-text-5" id="text-org479831a">
+<p>
+The basic window navigation key.
+</p>
+<div class="org-src-container">
+<pre class="src src-conf">bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+</pre>
+</div>
+<p>
+Alternatively, with arrow keys:
+</p>
+<div class="org-src-container">
+<pre class="src src-conf">bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+</pre>
+</div>
+<p>
+Adding ALT-TAB functionality just in case.
+</p>
+<div class="org-src-container">
+<pre class="src src-conf">bindsym Mod1+Tab focus right
+bindsym Mod1+Shift+Tab focus left
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb20b0f1" class="outline-5">
+<h5 id="orgb20b0f1">move focused window</h5>
+<div class="outline-text-5" id="text-orgb20b0f1">
+<p>
+Used for moving window within workspace.
+</p>
+<div class="org-src-container">
+<pre class="src src-conf">bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+</pre>
+</div>
+<p>
+Also, with arrow keys:
+</p>
+<div class="org-src-container">
+<pre class="src src-conf">bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org497a2e6" class="outline-5">
+<h5 id="org497a2e6">split</h5>
+<div class="outline-text-5" id="text-org497a2e6">
+<p>
+horizontally
+</p>
+<div class="org-src-container">
+<pre class="src src-conf">bindsym $mod+Control+h split h; exec $notify <span style="color: #bc8f8f;">"Horizontal split"</span>
+</pre>
+</div>
+<p>
+vertically
+</p>
+<div class="org-src-container">
+<pre class="src src-conf">bindsym $mod+Control+v split v; exec $notify <span style="color: #bc8f8f;">"Vertical split"</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf0220d5" class="outline-5">
+<h5 id="orgf0220d5">fullscreen toggle</h5>
+<div class="outline-text-5" id="text-orgf0220d5">
+<div class="org-src-container">
+<pre class="src src-conf">bindsym $mod+f fullscreen toggle; exec $notify <span style="color: #bc8f8f;">"Fullscreen toggle"</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org94c82e5" class="outline-5">
+<h5 id="org94c82e5">container layout</h5>
+<div class="outline-text-5" id="text-org94c82e5">
+<p>
+stacked
+</p>
+<div class="org-src-container">
+<pre class="src src-conf">bindsym $mod+Control+s layout stacking; exec $notify <span style="color: #bc8f8f;">"Stacking layout"</span>
+</pre>
+</div>
+<p>
+tabbed
+</p>
+<div class="org-src-container">
+<pre class="src src-conf">bindsym $mod+Control+w layout tabbed; exec $notify <span style="color: #bc8f8f;">"Tabbed layout"</span>
+</pre>
+</div>
+<p>
+split, this is the default behavior.
+</p>
+<div class="org-src-container">
+<pre class="src src-conf">bindsym $mod+Control+e layout toggle split; exec $notify <span style="color: #bc8f8f;">"Split toggle"</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgdc05acb" class="outline-5">
+<h5 id="orgdc05acb">toggle tiling / floating</h5>
+<div class="outline-text-5" id="text-orgdc05acb">
+<div class="org-src-container">
+<pre class="src src-conf">bindsym $mod+Shift+space floating toggle; exec $notify <span style="color: #bc8f8f;">"Floating toggle"</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org7a5529f" class="outline-5">
+<h5 id="org7a5529f">change focus between tiling / floating windows</h5>
+<div class="outline-text-5" id="text-org7a5529f">
+<div class="org-src-container">
+<pre class="src src-conf">bindsym $mod+space focus mode_toggle; exec $notify <span style="color: #bc8f8f;">"Window focus toggle"</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgd1ac937" class="outline-5">
+<h5 id="orgd1ac937">focus parent container</h5>
+<div class="outline-text-5" id="text-orgd1ac937">
+<div class="org-src-container">
+<pre class="src src-conf">bindsym $mod+Control+a focus parent; exec $notify <span style="color: #bc8f8f;">"Focus parent container"</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgccad562" class="outline-5">
+<h5 id="orgccad562">focus child container</h5>
+<div class="outline-text-5" id="text-orgccad562">
+<div class="org-src-container">
+<pre class="src src-conf">bindsym $mod+Control+d focus child; exec $notify <span style="color: #bc8f8f;">"Focus child container"</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgddea54c" class="outline-5">
+<h5 id="orgddea54c">move to scratchpad</h5>
+<div class="outline-text-5" id="text-orgddea54c">
+<p>
+Move the current focused window into the scratchpad
+</p>
+<div class="org-src-container">
+<pre class="src src-conf">bindsym $mod+Shift+minus move scratchpad; exec $notify <span style="color: #bc8f8f;">"Moved to scratchpad"</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org5799bb6" class="outline-5">
+<h5 id="org5799bb6">show scratchpad</h5>
+<div class="outline-text-5" id="text-org5799bb6">
+<p>
+Show the next scratchpad window or hide the focused scratchpad window. If there are multiple scratchpad windows, this command cycles through them.
+</p>
+<div class="org-src-container">
+<pre class="src src-conf">bindsym $mod+minus scratchpad show; exec $notify <span style="color: #bc8f8f;">"Show scratchpad"</span>
+<span style="color: #b8860b;">bindsym $mod+Shift+c [class</span>=<span style="color: #bc8f8f;">"(?i)xclipboard"</span>] scratchpad show
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org1040ffa" class="outline-4">
+<h4 id="org1040ffa">workspace management</h4>
+<div class="outline-text-4" id="text-org1040ffa">
+<div class="org-src-container">
+<pre class="src src-conf">bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+</pre>
+</div>
+</div>
+<div id="outline-container-org6e2c6de" class="outline-5">
+<h5 id="org6e2c6de">switch to workspace prev / next</h5>
+<div class="outline-text-5" id="text-org6e2c6de">
+<div class="org-src-container">
+<pre class="src src-conf">bindsym $mod+bracketleft workspace prev
+bindsym $mod+bracketright workspace next
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org22dc7e0" class="outline-5">
+<h5 id="org22dc7e0">move focused containerto workspace</h5>
+<div class="outline-text-5" id="text-org22dc7e0">
+<div class="org-src-container">
+<pre class="src src-conf">bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org845b88d" class="outline-5">
+<h5 id="org845b88d">move using bracket keys</h5>
+<div class="outline-text-5" id="text-org845b88d">
+<div class="org-src-container">
+<pre class="src src-conf">bindsym Control+Mod1+bracketleft move to workspace previous
+bindsym Control+Mod1+bracketright move to workspace next
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org509b964" class="outline-5">
+<h5 id="org509b964">back and forth</h5>
+<div class="outline-text-5" id="text-org509b964">
+<div class="org-src-container">
+<pre class="src src-conf">bindsym $mod+Tab workspace back_and_forth
+bindsym $mod+Shift+Tab move container to workspace back_and_forth
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orga39e60c" class="outline-5">
+<h5 id="orga39e60c">switch output focus</h5>
+<div class="outline-text-5" id="text-orga39e60c">
+<div class="org-src-container">
+<pre class="src src-conf">bindsym $mod+Control+1 focus output primary
+bindsym $mod+Control+2 focus output right
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org9016eee" class="outline-5">
+<h5 id="org9016eee">moving to output</h5>
+<div class="outline-text-5" id="text-org9016eee">
+<div class="org-src-container">
+<pre class="src src-conf">bindsym $mod+Control+Shift+1 move workspace to output primary
+bindsym $mod+Control+Shift+2 move workspace to output right
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgceed5e1" class="outline-4">
+<h4 id="orgceed5e1">Reload configuration</h4>
+<div class="outline-text-4" id="text-orgceed5e1">
+<div class="org-src-container">
+<pre class="src src-conf">bindsym $mod+Shift+F11 reload
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org85f50d0" class="outline-4">
+<h4 id="org85f50d0">modes</h4>
+<div class="outline-text-4" id="text-org85f50d0">
+</div>
+<div id="outline-container-org40f5a8b" class="outline-5">
+<h5 id="org40f5a8b">resize</h5>
+<div class="outline-text-5" id="text-org40f5a8b">
+<p>
+This only work in floating mode.
+</p>
+<div class="org-src-container">
+<pre class="src src-conf"><span style="color: #b22222;"># </span><span style="color: #b22222;">resize window (you can also use the mouse for that)
+</span><span style="color: #228b22;">mode </span><span style="color: #228b22;">"resize"</span> {
+<span style="color: #b22222;"># </span><span style="color: #b22222;">These bindings trigger as soon as you enter the resize mode
+</span>
+<span style="color: #b22222;"># </span><span style="color: #b22222;">Pressing left will shrink the window&#8217;s width.
+</span><span style="color: #b22222;"># </span><span style="color: #b22222;">Pressing right will grow the window&#8217;s width.
+</span><span style="color: #b22222;"># </span><span style="color: #b22222;">Pressing up will shrink the window&#8217;s height.
+</span><span style="color: #b22222;"># </span><span style="color: #b22222;">Pressing down will grow the window&#8217;s height.
+</span>bindsym $left       resize shrink width 10 px or 10 ppt
+bindsym $down       resize grow height 10 px or 10 ppt
+bindsym $up         resize shrink height 10 px or 10 ppt
+bindsym $right      resize grow width 10 px or 10 ppt
+
+<span style="color: #b22222;"># </span><span style="color: #b22222;">same bindings, but for the arrow keys
+</span>bindsym Left        resize shrink width 10 px or 10 ppt
+bindsym Down        resize grow height 10 px or 10 ppt
+bindsym Up          resize shrink height 10 px or 10 ppt
+bindsym Right       resize grow width 10 px or 10 ppt
+
+<span style="color: #b22222;"># </span><span style="color: #b22222;">back to normal: Enter or Escape or $mod+r
+</span>bindsym Return mode <span style="color: #bc8f8f;">"default"</span>
+bindsym Escape mode <span style="color: #bc8f8f;">"default"</span>
+bindsym $mod+r mode <span style="color: #bc8f8f;">"default"</span>
+}
+
+bindsym $mod+r mode <span style="color: #bc8f8f;">"resize"</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org0115b59" class="outline-4">
+<h4 id="org0115b59">Exit sway</h4>
+<div class="outline-text-4" id="text-org0115b59">
+<div class="org-src-container">
+<pre class="src src-conf">bindsym $mod+q exec swaynag -t warning -m <span style="color: #bc8f8f;">'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.'</span> -B <span style="color: #bc8f8f;">'Yes, exit sway'</span> <span style="color: #bc8f8f;">'swaymsg exit'</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org15cb168" class="outline-3">
+<h3 id="org15cb168">Bar</h3>
+<div class="outline-text-3" id="text-org15cb168">
+<div class="org-src-container">
+<pre class="src src-conf"><span style="color: #228b22;">bar</span> {
+    position top
+
+    wrap_scroll yes
+      mode dock
+      font pango:JetBrainsMonoNL Nerd Font Mono 6 
+      tray_output *
+      icon_theme Papirus
+    <span style="color: #b22222;"># </span><span style="color: #b22222;">When the status_command prints a new line to stdout, swaybar updates.
+</span>    <span style="color: #b22222;"># </span><span style="color: #b22222;">The default just shows the current date and time.
+</span>    status_command while date +<span style="color: #bc8f8f;">'%Y-%m-%d %X'</span>; do sleep 1; done
+
+    <span style="color: #228b22;">colors</span> {
+        statusline $color04
+        background $color01
+              separator $color03
+              <span style="color: #b22222;">#                  </span><span style="color: #b22222;">Border    #background #text
+</span>        focused_workspace  $color02  $color03    $color06
+        inactive_workspace $color01  $color01    $color06
+        active_workspace   $color00  $color00    $color01
+        urgent_workspace   $color01  $color01    $color11
+        binding_mode       $color01  $color01    $color14
+    }
+}
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-conf">bindsym $mod+Control+m bar mode toggle
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org22d8d37" class="outline-3">
+<h3 id="org22d8d37">Window rules</h3>
+<div class="outline-text-3" id="text-org22d8d37">
+</div>
+<div id="outline-container-orgd54db0d" class="outline-4">
+<h4 id="orgd54db0d">Audio</h4>
+<div class="outline-text-4" id="text-orgd54db0d">
+<div class="org-src-container">
+<pre class="src src-conf"><span style="color: #b8860b;">for_window [instance</span>=<span style="color: #bc8f8f;">"(?i)pavucontrol"</span>] floating enable
+<span style="color: #b8860b;">for_window [title</span>=<span style="color: #bc8f8f;">"(?i)alsamixer"</span>] floating enable
+<span style="color: #b8860b;">for_window [app_id</span>=<span style="color: #bc8f8f;">"com.saivert.pwvucontrol"</span>] floating enable; resize set 600 100; move position center
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgfb50afd" class="outline-4">
+<h4 id="orgfb50afd">anki</h4>
+<div class="outline-text-4" id="text-orgfb50afd">
+<div class="org-src-container">
+<pre class="src src-conf"><span style="color: #b8860b;">for_window [class</span>=<span style="color: #bc8f8f;">".*(?i)anki"</span>] floating enable
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org1d8ac6a" class="outline-4">
+<h4 id="org1d8ac6a">borderless</h4>
+<div class="outline-text-4" id="text-org1d8ac6a">
+<div class="org-src-container">
+<pre class="src src-conf"><span style="color: #b8860b;">for_window [class</span>=<span style="color: #bc8f8f;">".*"</span>] border pixel 0
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgaee5f6b" class="outline-4">
+<h4 id="orgaee5f6b">cheese</h4>
+<div class="outline-text-4" id="text-orgaee5f6b">
+<div class="org-src-container">
+<pre class="src src-conf"><span style="color: #b8860b;">for_window [app_id</span>=<span style="color: #bc8f8f;">"org.gnome.Cheese"</span>] floating enable; resize set 680 680; move position center
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org9d62315" class="outline-4">
+<h4 id="org9d62315">easyeffects</h4>
+<div class="outline-text-4" id="text-org9d62315">
+<div class="org-src-container">
+<pre class="src src-conf"><span style="color: #b8860b;">for_window [class</span>=<span style="color: #bc8f8f;">"(?i)easyeffects"</span>] floating enable resize set 680 680 move position center
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org36e7ee4" class="outline-4">
+<h4 id="org36e7ee4">floating dialog window</h4>
+<div class="outline-text-4" id="text-org36e7ee4">
+<div class="org-src-container">
+<pre class="src src-conf"><span style="color: #b8860b;">for_window [window_role</span>=<span style="color: #bc8f8f;">"About"</span>] floating enable
+<span style="color: #b8860b;">for_window [window_role</span>=<span style="color: #bc8f8f;">"Organizer"</span>] floating enable
+<span style="color: #b8860b;">for_window [window_role</span>=<span style="color: #bc8f8f;">"Preferences"</span>] floating enable
+<span style="color: #b8860b;">for_window [window_role</span>=<span style="color: #bc8f8f;">"bubble"</span>] floating enable
+<span style="color: #b8860b;">for_window [window_role</span>=<span style="color: #bc8f8f;">"page-info"</span>] floating enable
+<span style="color: #b8860b;">for_window [window_role</span>=<span style="color: #bc8f8f;">"pop-up"</span>] floating enable
+<span style="color: #b8860b;">for_window [window_role</span>=<span style="color: #bc8f8f;">"task_dialog"</span>] floating enable
+<span style="color: #b8860b;">for_window [window_role</span>=<span style="color: #bc8f8f;">"toolbox"</span>] floating enable
+<span style="color: #b8860b;">for_window [window_role</span>=<span style="color: #bc8f8f;">"webconsole"</span>] floating enable
+<span style="color: #b8860b;">for_window [window_type</span>=<span style="color: #bc8f8f;">"dialog"</span>] floating enable
+<span style="color: #b8860b;">for_window [window_type</span>=<span style="color: #bc8f8f;">"menu"</span>] floating enable
+<span style="color: #b8860b;">for_window [class</span>=<span style="color: #bc8f8f;">".*FileRoller"</span>] floating enable resize set 680 680 move position center
+<span style="color: #b8860b;">for_window [class</span>=<span style="color: #bc8f8f;">"(?i)file-roller"</span>] floating enable
+<span style="color: #b8860b;">for_window [window_role</span>=<span style="color: #bc8f8f;">"GtkFileChooserDialog"</span>] floating enable
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf9766c3" class="outline-4">
+<h4 id="orgf9766c3">gvim</h4>
+<div class="outline-text-4" id="text-orgf9766c3">
+<div class="org-src-container">
+<pre class="src src-conf"><span style="color: #b8860b;">for_window [class</span>=<span style="color: #bc8f8f;">"Gvim"</span>] floating disable
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org81e2c2b" class="outline-4">
+<h4 id="org81e2c2b">htop</h4>
+<div class="outline-text-4" id="text-org81e2c2b">
+<div class="org-src-container">
+<pre class="src src-conf"><span style="color: #b8860b;">for_window [class</span>=<span style="color: #bc8f8f;">"(?i)htop"</span>] floating enable
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org9777361" class="outline-4">
+<h4 id="org9777361">kdeconnect</h4>
+<div class="outline-text-4" id="text-org9777361">
+<div class="org-src-container">
+<pre class="src src-conf"><span style="color: #b8860b;">for_window [class</span>=<span style="color: #bc8f8f;">"(?i)org.kde.kdeconnect.app"</span>] floating enable
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orga1e35ce" class="outline-4">
+<h4 id="orga1e35ce">khal</h4>
+<div class="outline-text-4" id="text-orga1e35ce">
+<div class="org-src-container">
+<pre class="src src-conf"><span style="color: #b8860b;">for_window [class</span>=<span style="color: #bc8f8f;">"(?i)khal"</span>] floating enable
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org46ac9f4" class="outline-4">
+<h4 id="org46ac9f4">ncmpcpp</h4>
+<div class="outline-text-4" id="text-org46ac9f4">
+<div class="org-src-container">
+<pre class="src src-conf"><span style="color: #b8860b;">for_window [class</span>=<span style="color: #bc8f8f;">"(?i)ncmpcpp"</span>] floating enable; move scratchpad
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org926c6f5" class="outline-4">
+<h4 id="org926c6f5">OBS</h4>
+<div class="outline-text-4" id="text-org926c6f5">
+<div class="org-src-container">
+<pre class="src src-conf"><span style="color: #b8860b;">for_window [class</span>=<span style="color: #bc8f8f;">"(?i)com.obsproject.studio"</span> title=<span style="color: #bc8f8f;">"(?i)auto-configuration-wizard"</span>] floating enable resize set 680 680 move position center
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org00c816d" class="outline-4">
+<h4 id="org00c816d">polkit</h4>
+<div class="outline-text-4" id="text-org00c816d">
+<div class="org-src-container">
+<pre class="src src-conf"><span style="color: #b8860b;">for_window [class</span>=<span style="color: #bc8f8f;">"^org.kde.polkit-kde-authentication-agent-1"</span>] floating enable
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org34fb66e" class="outline-4">
+<h4 id="org34fb66e">screenkey</h4>
+<div class="outline-text-4" id="text-org34fb66e">
+<div class="org-src-container">
+<pre class="src src-conf"><span style="color: #b8860b;">for_window [class</span>=<span style="color: #bc8f8f;">"(?i)screenkey"</span>] floating enable
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org99c7298" class="outline-4">
+<h4 id="org99c7298">Steam</h4>
+<div class="outline-text-4" id="text-org99c7298">
+<div class="org-src-container">
+<pre class="src src-conf"><span style="color: #b8860b;">for_window [class</span>=<span style="color: #bc8f8f;">"(?i)steam.*"</span>] floating enable resize set 680 680 move position center
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org9587c37" class="outline-4">
+<h4 id="org9587c37">thunderbird</h4>
+<div class="outline-text-4" id="text-org9587c37">
+<div class="org-src-container">
+<pre class="src src-conf"><span style="color: #b8860b;">for_window [class</span>=<span style="color: #bc8f8f;">"thunderbird"</span> title=<span style="color: #bc8f8f;">"status"</span>] floating enable
+<span style="color: #b8860b;">for_window [class</span>=<span style="color: #bc8f8f;">"thunderbird"</span> title=<span style="color: #bc8f8f;">"(.*)Reminders"</span>] floating enable
+<span style="color: #b8860b;">for_window [class</span>=<span style="color: #bc8f8f;">"thunderbird"</span> title=<span style="color: #bc8f8f;">"Write.*"</span>] floating enable resize set 680 680
+<span style="color: #b8860b;">for_window [class</span>=<span style="color: #bc8f8f;">"thunderbird"</span> title=<span style="color: #bc8f8f;">"Search.*"</span>] floating enable resize set 600 200
+<span style="color: #b8860b;">for_window [class</span>=<span style="color: #bc8f8f;">"thunderbird"</span> title=<span style="color: #bc8f8f;">"Confirm.*"</span>] floating enable resize set 600 200
+<span style="color: #b8860b;">for_window [class</span>=<span style="color: #bc8f8f;">"thunderbird"</span> title=<span style="color: #bc8f8f;">"Send.*"</span>] floating enable
+<span style="color: #b8860b;">for_window [class</span>=<span style="color: #bc8f8f;">"Msgcompose.*"</span>] floating enable resize set 680 680
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgbcaa3cd" class="outline-4">
+<h4 id="orgbcaa3cd">transmission</h4>
+<div class="outline-text-4" id="text-orgbcaa3cd">
+<div class="org-src-container">
+<pre class="src src-conf"><span style="color: #b8860b;">for_window [class</span>=<span style="color: #bc8f8f;">"(?i)transmission.*"</span>] floating enable
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org458d146" class="outline-4">
+<h4 id="org458d146">vim</h4>
+<div class="outline-text-4" id="text-org458d146">
+<div class="org-src-container">
+<pre class="src src-conf"><span style="color: #b8860b;">for_window [class</span>=<span style="color: #bc8f8f;">"(?i)vim"</span>] floating enable
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org9c24b40" class="outline-4">
+<h4 id="org9c24b40">virt-manager</h4>
+<div class="outline-text-4" id="text-org9c24b40">
+<div class="org-src-container">
+<pre class="src src-conf"><span style="color: #b8860b;">for_window [class</span>=<span style="color: #bc8f8f;">"virt-manager"</span>] floating enable resize set 680 680 move position center
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orge82a74d" class="outline-3">
+<h3 id="orge82a74d">Workspace assignment</h3>
+<div class="outline-text-3" id="text-orge82a74d">
+</div>
+<div id="outline-container-org18eabb9" class="outline-4">
+<h4 id="org18eabb9">workspace 3</h4>
+<div class="outline-text-4" id="text-org18eabb9">
+<div class="org-src-container">
+<pre class="src src-conf"><span style="color: #b8860b;">assign [class</span>=<span style="color: #bc8f8f;">"qutebrowser"</span>] $ws3
+<span style="color: #b8860b;">assign [class</span>=<span style="color: #bc8f8f;">"firefox"</span>] $ws3
+<span style="color: #b8860b;">assign [class</span>=<span style="color: #bc8f8f;">"google-chrome"</span>] $ws3
+<span style="color: #b8860b;">assign [class</span>=<span style="color: #bc8f8f;">"Nyxt"</span>] $ws3
+<span style="color: #b8860b;">assign [class</span>=<span style="color: #bc8f8f;">"pidgin"</span>] $ws7
+</pre>
+</div>
+<p>
+Web browser goes here.
+</p>
+</div>
+</div>
+<div id="outline-container-org8b90834" class="outline-4">
+<h4 id="org8b90834">workspace 4</h4>
+<div class="outline-text-4" id="text-org8b90834">
+<div class="org-src-container">
+<pre class="src src-conf"><span style="color: #b8860b;">assign [class</span>=<span style="color: #bc8f8f;">"Evolution"</span>] $ws4
+<span style="color: #b8860b;">assign [class</span>=<span style="color: #bc8f8f;">"thunderbird"</span>] $ws4
+</pre>
+</div>
+<p>
+For when I use GUI mail client.
+</p>
+</div>
+</div>
+<div id="outline-container-orga7652df" class="outline-4">
+<h4 id="orga7652df">workspace 5</h4>
+<div class="outline-text-4" id="text-orga7652df">
+<div class="org-src-container">
+<pre class="src src-conf"><span style="color: #b8860b;">assign [class</span>=<span style="color: #bc8f8f;">"Thunar"</span>] $ws5
+</pre>
+</div>
+<p>
+File manager.
+</p>
+</div>
+</div>
+<div id="outline-container-org1f5747b" class="outline-4">
+<h4 id="org1f5747b">workspace 6</h4>
+<div class="outline-text-4" id="text-org1f5747b">
+<div class="org-src-container">
+<pre class="src src-conf"><span style="color: #b8860b;">assign [title</span>=<span style="color: #bc8f8f;">"Libreoffice"</span>] $ws6
+<span style="color: #b8860b;">assign [title</span>=<span style="color: #bc8f8f;">"com-sonicwall-NetExtender"</span>] $ws6
+<span style="color: #b8860b;">assign [title</span>=<span style="color: #bc8f8f;">"Bitwarden"</span>] $ws6
+<span style="color: #b8860b;">assign [title</span>=<span style="color: #bc8f8f;">"zoom"</span>] $ws6
+</pre>
+</div>
+<p>
+Office-related
+</p>
+</div>
+</div>
+<div id="outline-container-org5f48abb" class="outline-4">
+<h4 id="org5f48abb">workspace 7</h4>
+</div>
+<div id="outline-container-org1e07404" class="outline-4">
+<h4 id="org1e07404">workspace 8</h4>
+<div class="outline-text-4" id="text-org1e07404">
+<div class="org-src-container">
+<pre class="src src-conf"><span style="color: #b8860b;">assign [class</span>=<span style="color: #bc8f8f;">"Rhythmbox"</span>] $ws8
+<span style="color: #b8860b;">assign [class</span>=<span style="color: #bc8f8f;">"vlc"</span>] $ws8
+<span style="color: #b8860b;">assign [class</span>=<span style="color: #bc8f8f;">"mpv"</span>] $ws8
+<span style="color: #b8860b;">assign [class</span>=<span style="color: #bc8f8f;">"Cheese"</span>] $ws8
+<span style="color: #b8860b;">assign [class</span>=<span style="color: #bc8f8f;">"Spotify"</span>] $ws8
+<span style="color: #b8860b;">assign [class</span>=<span style="color: #bc8f8f;">"Picard"</span>] $ws8
+</pre>
+</div>
+<p>
+Multimedia related.
+</p>
+</div>
+</div>
+<div id="outline-container-orgb45c8f8" class="outline-4">
+<h4 id="orgb45c8f8">workspace 10</h4>
+<div class="outline-text-4" id="text-orgb45c8f8">
+<div class="org-src-container">
+<pre class="src src-conf"><span style="color: #b8860b;">assign [class</span>=<span style="color: #bc8f8f;">"Steam"</span>] $ws10
+<span style="color: #b8860b;">assign [title</span>=<span style="color: #bc8f8f;">"Steam"</span>] $ws10
+</pre>
+</div>
+<p>
+Game!
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orga4eed6d" class="outline-3">
+<h3 id="orga4eed6d">Include system configuration</h3>
+<div class="outline-text-3" id="text-orga4eed6d">
+<div class="org-src-container">
+<pre class="src src-conf">include /etc/sway/config.d/*
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org9816fe6" class="outline-2">
+<h2 id="org9816fe6">Wofi</h2>
+<div class="outline-text-2" id="text-org9816fe6">
+</div>
+<div id="outline-container-orgc307c4d" class="outline-3">
+<h3 id="orgc307c4d">config</h3>
+<div class="outline-text-3" id="text-orgc307c4d">
+<div class="org-src-container">
+<pre class="src src-conf"><span style="color: #b8860b;">insensitive</span> = true
+<span style="color: #b8860b;">term</span>=alacritty
+<span style="color: #b8860b;">key_up</span>=Up,Ctrl-p,Ctrl-k
+<span style="color: #b8860b;">key_down</span>=Down,Ctrl-n,Ctrl-j
+<span style="color: #b8860b;">key_left</span>=Left,Ctrl-b
+<span style="color: #b8860b;">key_right</span>=Right,Ctrl-f
+<span style="color: #b8860b;">key_pgup</span>=Page_Up,Alt-v
+<span style="color: #b8860b;">key_pgdn</span>=Page_Down,Ctrl-f
+<span style="color: #b8860b;">key_exit</span>=Escape,Ctrl-g,Ctrl-bracketleft
+<span style="color: #b8860b;">matching</span>=fuzzy
+<span style="color: #b8860b;">allow_image</span>=true
+<span style="color: #b8860b;">allow_markup</span>=true
+<span style="color: #b8860b;">gtk_dark</span>=true
+<span style="color: #b8860b;">dynamic_lines</span>=false
+<span style="color: #b8860b;">close_on_focus_loss</span>=true
+<span style="color: #b8860b;">single_click</span>=true
+<span style="color: #b8860b;">height</span>=30%
+<span style="color: #b8860b;">width</span>=30%
+<span style="color: #b8860b;">columns</span>=1
+<span style="color: #b8860b;">prompt</span>=PROMPT
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgc7cb61d" class="outline-3">
+<h3 id="orgc7cb61d">style</h3>
+<div class="outline-text-3" id="text-orgc7cb61d">
+<div class="org-src-container">
+<pre class="src src-css"><span style="color: #00008b;">@define-color</span> color00 <span style="color: #ffffff; background-color: #2e3440;">#2e3440</span>;
+<span style="color: #00008b;">@define-color</span> color01 <span style="color: #ffffff; background-color: #3b4252;">#3b4252</span>;
+<span style="color: #00008b;">@define-color</span> color02 <span style="color: #ffffff; background-color: #434c5e;">#434c5e</span>;
+<span style="color: #00008b;">@define-color</span> color03 <span style="color: #ffffff; background-color: #4c566a;">#4c566a</span>;
+<span style="color: #00008b;">@define-color</span> color04 <span style="color: #ffffff; background-color: #434c5e;">#434c5e</span>;
+<span style="color: #00008b;">@define-color</span> color05 <span style="color: #000000; background-color: #d8dee9;">#d8dee9</span>;
+<span style="color: #00008b;">@define-color</span> color06 <span style="color: #000000; background-color: #e5e9f0;">#e5e9f0</span>;
+<span style="color: #00008b;">@define-color</span> color07 <span style="color: #000000; background-color: #eceff4;">#eceff4</span>;
+<span style="color: #00008b;">@define-color</span> color08 <span style="color: #000000; background-color: #8fbcbb;">#8fbcbb</span>;
+<span style="color: #00008b;">@define-color</span> color09 <span style="color: #000000; background-color: #88c0d0;">#88c0d0</span>;
+<span style="color: #00008b;">@define-color</span> color010 <span style="color: #000000; background-color: #81a1c1;">#81a1c1</span>;
+<span style="color: #00008b;">@define-color</span> color011 <span style="color: #000000; background-color: #5e81ac;">#5e81ac</span>;
+<span style="color: #00008b;">@define-color</span> color012 <span style="color: #ffffff; background-color: #bf616a;">#bf616a</span>;
+<span style="color: #00008b;">@define-color</span> color013 <span style="color: #000000; background-color: #d08770;">#d08770</span>;
+<span style="color: #00008b;">@define-color</span> color014 <span style="color: #000000; background-color: #ebcb8b;">#ebcb8b</span>;
+<span style="color: #00008b;">@define-color</span> color015 <span style="color: #000000; background-color: #a3be8c;">#a3be8c</span>;
+<span style="color: #00008b;">@define-color</span> color016 <span style="color: #ffffff; background-color: #b48ead;">#b48ead</span>;
+
+<span style="color: #00008b;">@define-color</span> background-alpha <span style="color: #ffffff; background-color: #2e3440;">rgba(46, 52, 64, 0.60)</span>;
+
+<span style="color: #0000ff;">#window</span> {
+    <span style="color: #4169e1;">margin-right</span>: 100px;
+    <span style="color: #4169e1;">border</span>: 1px solid <span style="color: #00008b;">@color01</span>;
+    <span style="color: #4169e1;">background-color</span>: <span style="color: #00008b;">@background-alpha</span>;
+}
+
+<span style="color: #0000ff;">#input</span> {
+    <span style="color: #4169e1;">color</span>: <span style="color: #00008b;">@color07</span>;
+
+      <span style="color: #4169e1;">margin-left</span>: 100px;
+      <span style="color: #4169e1;">margin-right</span>: 100px;
+      <span style="color: #4169e1;">margin-top</span>: 10px;
+      <span style="color: #4169e1;">margin-bottom</span>: 20px;
+
+      <span style="color: #4169e1;">box-shadow</span>: none;
+
+    <span style="color: #4169e1;">border</span>: 1px solid <span style="color: #00008b;">@color01</span>;
+      <span style="color: #4169e1;">border-radius</span>: 20px;
+
+    <span style="color: #4169e1;">background-color</span>: <span style="color: #00008b;">@color00</span>;
+}
+
+<span style="color: #0000ff;">#input:focus</span> {
+      <span style="color: #4169e1;">color</span>: <span style="color: #00008b;">@color07</span>;
+
+    <span style="color: #4169e1;">margin-left</span>: 10px;
+    <span style="color: #4169e1;">margin-right</span>: 10px;
+    <span style="color: #4169e1;">margin-top</span>: 10px;
+    <span style="color: #4169e1;">margin-bottom</span>: 20px;
+
+    <span style="color: #4169e1;">background-color</span>: <span style="color: #00008b;">@color01</span>;
+}
+
+<span style="color: #0000ff;">#text</span> {
+    <span style="color: #4169e1;">margin</span>: 5px;
+    <span style="color: #4169e1;">border</span>: none;
+    <span style="color: #4169e1;">color</span>: <span style="color: #00008b;">@color07</span>;
+}
+
+<span style="color: #0000ff;">#entry</span> {
+      <span style="color: #4169e1;">font-family</span>: JetBrainsMonoNL Nerd Font Mono;
+      <span style="color: #4169e1;">border-radius</span>: 20px;
+
+      <span style="color: #4169e1;">margin</span>: 5px;
+      <span style="color: #4169e1;">margin-right</span>: 20px;
+      <span style="color: #4169e1;">margin-left</span>: 20px;
+      <span style="color: #4169e1;">padding-left</span>: 10px;
+}
+
+<span style="color: #0000ff;">#entry:focus</span> {
+      <span style="color: #4169e1;">background</span>: <span style="color: #00008b;">@color00</span>;
+      <span style="color: #4169e1;">border-radius</span>: 20px;
+}
+
+#entry:selected {
+      <span style="color: #4169e1;">background</span>: <span style="color: #00008b;">@color00</span>;
+}
+
+#entry:unselected {
+      <span style="color: #4169e1;">background</span>: <span style="color: #00008b;">@color00</span>;
+}
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org450bc39" class="outline-2">
+<h2 id="org450bc39">Mako</h2>
+<div class="outline-text-2" id="text-org450bc39">
+</div>
+<div id="outline-container-org018a25b" class="outline-3">
+<h3 id="org018a25b">config</h3>
+<div class="outline-text-3" id="text-org018a25b">
+<div class="org-src-container">
+<pre class="src src-conf"><span style="color: #b8860b;">max-history</span>=5
+<span style="color: #b8860b;">on-button-left</span>=invoke-default-action
+<span style="color: #b8860b;">on-button-right</span>=dismiss
+<span style="color: #b8860b;">font</span>=JetBrainsMonoNL Nerd Font Mono 8
+<span style="color: #b8860b;">background-color</span>=<span style="color: #b22222;">#</span><span style="color: #b22222;">3b4252
+</span><span style="color: #b8860b;">text-color</span>=<span style="color: #b22222;">#</span><span style="color: #b22222;">eceff4
+</span><span style="color: #b8860b;">border-color</span>=<span style="color: #b22222;">#</span><span style="color: #b22222;">2e3440
+</span><span style="color: #b8860b;">border-size</span>=1
+<span style="color: #b8860b;">border-radius</span>=15
+<span style="color: #b8860b;">progress-color</span>=over <span style="color: #b22222;">#</span><span style="color: #b22222;">5e81ac
+</span><span style="color: #b8860b;">width</span>=300
+<span style="color: #b8860b;">height</span>=200
+<span style="color: #b8860b;">padding</span>=8, 11
+<span style="color: #b8860b;">margin</span>=8, 11
+<span style="color: #b8860b;">outer-margin</span>=8, 11
+<span style="color: #b8860b;">default-timeout</span>=2500
+<span style="color: #b8860b;">max-visible</span>=5
+<span style="color: #b8860b;">text-alignment</span>=center
+<span style="color: #b8860b;">icon-path</span>=/usr/share/icons/breeze:/usr/share/icons/Papirus-Dark
+<span style="color: #b8860b;">anchor</span>=top-right
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgfd37e48" class="outline-2">
+<h2 id="orgfd37e48">Scripts</h2>
+<div class="outline-text-2" id="text-orgfd37e48">
+</div>
+<div id="outline-container-orgd1fa54e" class="outline-3">
+<h3 id="orgd1fa54e">grimshot</h3>
+<div class="outline-text-3" id="text-orgd1fa54e">
+<p>
+This is taken from <a href="https://github.com/OctopusET/sway-contrib/blob/master/grimshot/grimshot">sway-contrib</a>.
+</p>
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #b22222;">## </span><span style="color: #b22222;">Grimshot: a helper for screenshots within sway
+</span><span style="color: #b22222;">## </span><span style="color: #b22222;">Requirements:
+</span><span style="color: #b22222;">##  </span><span style="color: #b22222;">- `grim`: screenshot utility for wayland
+</span><span style="color: #b22222;">##  </span><span style="color: #b22222;">- `slurp`: to select an area
+</span><span style="color: #b22222;">##  </span><span style="color: #b22222;">- `swaymsg`: to read properties of current window
+</span><span style="color: #b22222;">##  </span><span style="color: #b22222;">- `wl-copy`: clipboard utility
+</span><span style="color: #b22222;">##  </span><span style="color: #b22222;">- `jq`: json utility to parse swaymsg output
+</span><span style="color: #b22222;">##  </span><span style="color: #b22222;">- `notify-send`: to show notifications
+</span><span style="color: #b22222;">## </span><span style="color: #b22222;">Those are needed to be installed, if unsure, run `grimshot check`
+</span><span style="color: #b22222;">##</span><span style="color: #b22222;">
+</span><span style="color: #b22222;">## </span><span style="color: #b22222;">See `man 1 grimshot` or `grimshot usage` for further details.
+</span>
+<span style="color: #0000ff;">when</span>() {
+  <span style="color: #b8860b;">condition</span>=$<span style="color: #b8860b;">1</span>
+  <span style="color: #b8860b;">action</span>=$<span style="color: #b8860b;">2</span>
+
+  <span style="color: #4169e1;">if </span><span style="color: #00008b;">eval</span> <span style="color: #bc8f8f;">"$condition"</span>; <span style="color: #4169e1;">then</span>
+    <span style="color: #00008b;">eval</span> <span style="color: #bc8f8f;">"$action"</span>
+  <span style="color: #4169e1;">fi</span>
+}
+
+<span style="color: #0000ff;">whenOtherwise</span>() {
+  <span style="color: #b8860b;">condition</span>=$<span style="color: #b8860b;">1</span>
+  <span style="color: #b8860b;">true_action</span>=$<span style="color: #b8860b;">2</span>
+  <span style="color: #b8860b;">false_action</span>=$<span style="color: #b8860b;">3</span>
+
+  <span style="color: #4169e1;">if </span><span style="color: #00008b;">eval</span> <span style="color: #bc8f8f;">"$condition"</span>; <span style="color: #4169e1;">then</span>
+    <span style="color: #00008b;">eval</span> <span style="color: #bc8f8f;">"$true_action"</span>
+  <span style="color: #4169e1;">else</span>
+    <span style="color: #00008b;">eval</span> <span style="color: #bc8f8f;">"$false_action"</span>
+  <span style="color: #4169e1;">fi</span>
+}
+
+<span style="color: #0000ff;">any</span>() {
+  <span style="color: #4169e1;">for</span> tuple<span style="color: #4169e1;"> in</span> <span style="color: #bc8f8f;">"$@"</span>; <span style="color: #4169e1;">do</span>
+    <span style="color: #b8860b;">condition</span>=$(<span style="font-weight: bold;">echo "$tuple" | cut -d: -f1</span>)
+    <span style="color: #b8860b;">action</span>=$(<span style="font-weight: bold;">echo "$tuple" | cut -d: -f2-</span>)
+    <span style="color: #4169e1;">if </span><span style="color: #00008b;">eval</span> <span style="color: #bc8f8f;">"$condition"</span>; <span style="color: #4169e1;">then</span>
+      <span style="color: #00008b;">eval</span> <span style="color: #bc8f8f;">"$action"</span>
+      <span style="color: #4169e1;">return</span> 0
+    <span style="color: #4169e1;">fi</span>
+  <span style="color: #4169e1;">done</span>
+  <span style="color: #4169e1;">return</span> 1  <span style="color: #b22222;"># </span><span style="color: #b22222;">No conditions matched
+</span>}
+
+<span style="color: #b8860b;">NOTIFY</span>=no
+<span style="color: #b8860b;">CURSOR</span>=
+<span style="color: #b8860b;">WAIT</span>=no
+
+<span style="color: #0000ff;">getTargetDirectory</span>() {
+  <span style="color: #00008b;">test</span> -f <span style="color: #bc8f8f;">"${XDG_CONFIG_HOME:-$HOME/.config}/user-dirs.dirs"</span> &amp;&amp;
+    <span style="color: #00008b;">.</span> <span style="color: #bc8f8f;">"${XDG_CONFIG_HOME:-$HOME/.config}/user-dirs.dirs"</span>
+
+  <span style="color: #00008b;">echo</span> <span style="color: #bc8f8f;">"${XDG_SCREENSHOTS_DIR:-${XDG_PICTURES_DIR:-$HOME}}"</span>
+}
+
+<span style="color: #0000ff;">parseArgs</span>() {
+  <span style="color: #b8860b;">POSITIONAL_ARGS</span>=<span style="color: #bc8f8f;">""</span>
+
+  <span style="color: #4169e1;">while</span> [ $<span style="color: #b8860b;">#</span> -gt 0 ]; <span style="color: #4169e1;">do</span>
+    <span style="color: #4169e1;">case</span> <span style="color: #bc8f8f;">"$1"</span><span style="color: #4169e1;"> in</span>
+    -n | --notify)
+      <span style="color: #b8860b;">NOTIFY</span>=yes
+      <span style="color: #00008b;">shift</span>
+      ;;
+    -c | --cursor)
+      <span style="color: #b8860b;">CURSOR</span>=yes
+      <span style="color: #00008b;">shift</span>
+      ;;
+    -w | --wait)
+      <span style="color: #00008b;">shift</span>
+      <span style="color: #b8860b;">WAIT</span>=<span style="color: #bc8f8f;">"$1"</span>
+      <span style="color: #4169e1;">if </span><span style="color: #00008b;">echo</span> <span style="color: #bc8f8f;">"$WAIT"</span> | grep <span style="color: #bc8f8f;">"[^0-9]"</span> -q; <span style="color: #4169e1;">then</span>
+        <span style="color: #00008b;">echo</span> <span style="color: #bc8f8f;">"invalid value for wait '$WAIT'"</span> &gt;&amp;2
+        <span style="color: #4169e1;">exit</span> 3
+      <span style="color: #4169e1;">fi</span>
+      <span style="color: #00008b;">shift</span>
+      ;;
+    *)                                      <span style="color: #b22222;"># </span><span style="color: #b22222;">Treat anything else as a positional argument
+</span>      <span style="color: #b8860b;">POSITIONAL_ARGS</span>=<span style="color: #bc8f8f;">"$POSITIONAL_ARGS $1"</span> <span style="color: #b22222;"># </span><span style="color: #b22222;">Add positional argument to the string
+</span>      <span style="color: #00008b;">shift</span>
+      ;;
+    <span style="color: #4169e1;">esac</span>
+  <span style="color: #4169e1;">done</span>
+
+  <span style="color: #00008b;">set</span> -- $<span style="color: #b8860b;">POSITIONAL_ARGS</span> <span style="color: #b22222;"># </span><span style="color: #b22222;">Re-assign positional arguments
+</span>  <span style="color: #b8860b;">ACTION</span>=${<span style="color: #b8860b;">1</span>:-usage}
+  <span style="color: #b8860b;">SUBJECT</span>=${<span style="color: #b8860b;">2</span>:-screen}
+  <span style="color: #b8860b;">FILE</span>=${<span style="color: #b8860b;">3</span>:-$(<span style="font-weight: bold;">getTargetDirectory</span>)/$(<span style="font-weight: bold;">date -Ins</span>).png}
+
+}
+
+<span style="color: #0000ff;">printUsageMsg</span>() {
+  <span style="color: #00008b;">echo</span> <span style="color: #bc8f8f;">"Usage:"</span>
+  <span style="color: #00008b;">echo</span> <span style="color: #bc8f8f;">"  grimshot [--notify] [--cursor] [--wait N] (copy|save) [active|screen|output|area|window|anything] [FILE|-]"</span>
+  <span style="color: #00008b;">echo</span> <span style="color: #bc8f8f;">"  grimshot check"</span>
+  <span style="color: #00008b;">echo</span> <span style="color: #bc8f8f;">"  grimshot usage"</span>
+  <span style="color: #00008b;">echo</span> <span style="color: #bc8f8f;">""</span>
+  <span style="color: #00008b;">echo</span> <span style="color: #bc8f8f;">"Commands:"</span>
+  <span style="color: #00008b;">echo</span> <span style="color: #bc8f8f;">"  copy: Copy the screenshot data into the clipboard."</span>
+  <span style="color: #00008b;">echo</span> <span style="color: #bc8f8f;">"  save: Save the screenshot to a regular file or '-' to pipe to STDOUT."</span>
+  <span style="color: #00008b;">echo</span> <span style="color: #bc8f8f;">"  savecopy: Save the screenshot to a regular file and copy the data into the clipboard."</span>
+  <span style="color: #00008b;">echo</span> <span style="color: #bc8f8f;">"  check: Verify if required tools are installed and exit."</span>
+  <span style="color: #00008b;">echo</span> <span style="color: #bc8f8f;">"  usage: Show this message and exit."</span>
+  <span style="color: #00008b;">echo</span> <span style="color: #bc8f8f;">""</span>
+  <span style="color: #00008b;">echo</span> <span style="color: #bc8f8f;">"Targets:"</span>
+  <span style="color: #00008b;">echo</span> <span style="color: #bc8f8f;">"  active: Currently active window."</span>
+  <span style="color: #00008b;">echo</span> <span style="color: #bc8f8f;">"  screen: All visible outputs."</span>
+  <span style="color: #00008b;">echo</span> <span style="color: #bc8f8f;">"  output: Currently active output."</span>
+  <span style="color: #00008b;">echo</span> <span style="color: #bc8f8f;">"  area: Manually select a region."</span>
+  <span style="color: #00008b;">echo</span> <span style="color: #bc8f8f;">"  window: Manually select a window."</span>
+  <span style="color: #00008b;">echo</span> <span style="color: #bc8f8f;">"  anything: Manually select an area, window, or output."</span>
+  <span style="color: #4169e1;">exit</span>
+}
+
+<span style="color: #0000ff;">notify</span>() {
+  notify-send -t 3000 -a grimshot <span style="color: #bc8f8f;">"$@"</span>
+}
+
+<span style="color: #0000ff;">notifyOk</span>() {
+  <span style="color: #b8860b;">notify_disabled</span>=<span style="color: #bc8f8f;">'[ "$NOTIFY" = "no" ]'</span>
+  <span style="color: #b8860b;">action_involves_saving</span>=<span style="color: #bc8f8f;">'[ "$ACTION" = "save" ] || [ "$ACTION" = "savecopy" ]'</span>
+
+  <span style="color: #4169e1;">if </span><span style="color: #00008b;">eval</span> $<span style="color: #b8860b;">notify_disabled</span>; <span style="color: #4169e1;">then</span>
+        <span style="color: #4169e1;">return</span>
+  <span style="color: #4169e1;">fi</span>
+
+  <span style="color: #b8860b;">TITLE</span>=${<span style="color: #b8860b;">2</span>:-<span style="color: #bc8f8f;">"Screenshot"</span>}
+  <span style="color: #b8860b;">MESSAGE</span>=${<span style="color: #b8860b;">1</span>:-<span style="color: #bc8f8f;">"OK"</span>}
+
+  whenOtherwise <span style="color: #bc8f8f;">"$action_involves_saving"</span> <span style="color: #bc8f8f;">\</span>
+    <span style="color: #bc8f8f;">'notify "$TITLE" "$MESSAGE" -i "$FILE"'</span> <span style="color: #bc8f8f;">\</span>
+    <span style="color: #bc8f8f;">'notify "$TITLE" "$MESSAGE"'</span>
+}
+
+<span style="color: #0000ff;">notifyError</span>() {
+  <span style="color: #b8860b;">notify_enabled</span>=<span style="color: #bc8f8f;">'[ "$NOTIFY" = "yes" ]'</span>
+  <span style="color: #b8860b;">TITLE</span>=${<span style="color: #b8860b;">2</span>:-<span style="color: #bc8f8f;">"Screenshot"</span>}
+  <span style="color: #b8860b;">errorMssg</span>=$<span style="color: #b8860b;">1</span>
+  <span style="color: #b8860b;">MESSAGE</span>=${<span style="color: #b8860b;">errorMssg</span>:-<span style="color: #bc8f8f;">"Error taking screenshot with grim"</span>}
+
+  whenOtherwise <span style="color: #bc8f8f;">"$notify_enabled"</span> <span style="color: #bc8f8f;">\</span>
+    <span style="color: #bc8f8f;">'notify "$TITLE" "$MESSAGE" -u critical'</span> <span style="color: #bc8f8f;">\</span>
+    <span style="color: #bc8f8f;">'echo "$errorMssg"'</span>
+}
+
+<span style="color: #0000ff;">die</span>() {
+  <span style="color: #b8860b;">MSG</span>=${<span style="color: #b8860b;">1</span>:-Bye}
+  notifyError <span style="color: #bc8f8f;">"Error: $MSG"</span>
+  <span style="color: #4169e1;">exit</span> 2
+}
+
+<span style="color: #0000ff;">check</span>() {
+  <span style="color: #b8860b;">COMMAND</span>=$<span style="color: #b8860b;">1</span>
+  <span style="color: #b8860b;">command_exists</span>=<span style="color: #bc8f8f;">'command -v "$COMMAND" &gt; /dev/null 2&gt;&amp;1'</span>
+
+  whenOtherwise <span style="color: #bc8f8f;">"$command_exists"</span> <span style="color: #bc8f8f;">\</span>
+    <span style="color: #bc8f8f;">'RESULT="OK"'</span> <span style="color: #bc8f8f;">\</span>
+    <span style="color: #bc8f8f;">'RESULT="NOT FOUND"'</span>
+
+  <span style="color: #00008b;">echo</span> <span style="color: #bc8f8f;">"   $COMMAND: $RESULT"</span>
+}
+
+<span style="color: #0000ff;">takeScreenshot</span>() {
+  <span style="color: #b8860b;">FILE</span>=$<span style="color: #b8860b;">1</span>
+  <span style="color: #b8860b;">GEOM</span>=$<span style="color: #b8860b;">2</span>
+  <span style="color: #b8860b;">OUTPUT</span>=$<span style="color: #b8860b;">3</span>
+
+  <span style="color: #b8860b;">output_provided</span>=<span style="color: #bc8f8f;">'[ -n "$OUTPUT" ]'</span>
+  <span style="color: #b8860b;">geom_not_provided</span>=<span style="color: #bc8f8f;">'[ -z "$GEOM" ]'</span>
+
+  <span style="color: #b8860b;">output_action</span>=<span style="color: #bc8f8f;">'grim ${CURSOR:+-c} -o "$OUTPUT" "$FILE" || die "Unable to invoke grim"'</span>
+  <span style="color: #b8860b;">full_screenshot_action</span>=<span style="color: #bc8f8f;">'grim ${CURSOR:+-c} "$FILE" || die "Unable to invoke grim"'</span>
+  <span style="color: #b8860b;">geometry_screenshot_action</span>=<span style="color: #bc8f8f;">'grim ${CURSOR:+-c} -g "$GEOM" "$FILE" || die "Unable to invoke grim"'</span>
+
+  any <span style="color: #bc8f8f;">\</span>
+    <span style="color: #bc8f8f;">"$output_provided:$output_action"</span> <span style="color: #bc8f8f;">\</span>
+    <span style="color: #bc8f8f;">"$geom_not_provided:$full_screenshot_action"</span> <span style="color: #bc8f8f;">\</span>
+    <span style="color: #bc8f8f;">"true:$geometry_screenshot_action"</span>
+}
+<span style="color: #0000ff;">checkRequiredTools</span>() {
+  <span style="color: #00008b;">echo</span> <span style="color: #bc8f8f;">"Checking if required tools are installed. If something is missing, install it to your system and make it available in PATH..."</span>
+  check grim
+  check slurp
+  check swaymsg
+  check wl-copy
+  check jq
+  check notify-send
+  <span style="color: #4169e1;">exit</span>
+}
+
+<span style="color: #0000ff;">selectArea</span>() {
+  <span style="color: #b8860b;">GEOM</span>=$(<span style="font-weight: bold;">slurp -d</span>)
+  <span style="color: #b8860b;">geomIsEmpty</span>=<span style="color: #bc8f8f;">'[ -z "$GEOM" ]'</span>
+  when <span style="color: #bc8f8f;">"$geomIsEmpty"</span> <span style="color: #bc8f8f;">"exit 1"</span>
+  <span style="color: #b8860b;">WHAT</span>=<span style="color: #bc8f8f;">"Area"</span>
+}
+
+<span style="color: #0000ff;">selectActiveWindow</span>() {
+  <span style="color: #b8860b;">FOCUSED</span>=$(<span style="font-weight: bold;">swaymsg -t get_tree | jq -r 'recurse(.nodes[]?, .floating_nodes[]?</span><span style="color: #bc8f8f;">) | select(.focused)'</span>)
+  <span style="color: #b8860b;">GEOM</span>=$(<span style="font-weight: bold;">echo "$FOCUSED" | jq -r '.rect | "\(.x</span><span style="color: #bc8f8f;">),\(.y) \(.width)x\(.height)"'</span>)
+  <span style="color: #b8860b;">APP_ID</span>=$(<span style="font-weight: bold;">echo "$FOCUSED" | jq -r '.app_id'</span>)
+  <span style="color: #b8860b;">WHAT</span>=<span style="color: #bc8f8f;">"$APP_ID window"</span>
+}
+
+<span style="color: #0000ff;">selectScreen</span>() {
+  <span style="color: #b8860b;">GEOM</span>=<span style="color: #bc8f8f;">""</span>
+  <span style="color: #b8860b;">WHAT</span>=<span style="color: #bc8f8f;">"Screen"</span>
+}
+
+<span style="color: #0000ff;">selectOutput</span>() {
+  <span style="color: #b8860b;">GEOM</span>=<span style="color: #bc8f8f;">""</span>
+  <span style="color: #b8860b;">OUTPUT</span>=$(<span style="font-weight: bold;">swaymsg -t get_outputs | jq -r '.[] | select(.focused</span><span style="color: #bc8f8f;">)'</span> | jq -r <span style="color: #bc8f8f;">'.name'</span>)
+  <span style="color: #b8860b;">WHAT</span>=<span style="color: #bc8f8f;">"$OUTPUT"</span>
+}
+
+<span style="color: #0000ff;">selectWindow</span>() {
+  <span style="color: #b8860b;">GEOM</span>=$(<span style="font-weight: bold;">swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?</span><span style="color: #bc8f8f;">) | .rect | "\(.x),\(.y) \(.width)x\(.height)"'</span> | slurp -r)
+  <span style="color: #b8860b;">geomIsEmpty</span>=<span style="color: #bc8f8f;">'[ -z "$GEOM" ]'</span>
+  when <span style="color: #bc8f8f;">"$geomIsEmpty"</span> <span style="color: #bc8f8f;">"exit 1"</span>
+  <span style="color: #b8860b;">WHAT</span>=<span style="color: #bc8f8f;">"Window"</span>
+}
+
+<span style="color: #0000ff;">selectAnything</span>() {
+  <span style="color: #b8860b;">GEOM</span>=$(<span style="font-weight: bold;">swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?</span><span style="color: #bc8f8f;">) | .rect | "\(.x),\(.y) \(.width)x\(.height)"'</span> | slurp -o)
+  <span style="color: #b8860b;">geomIsEmpty</span>=<span style="color: #bc8f8f;">'[ -z "$GEOM" ]'</span>
+  when <span style="color: #bc8f8f;">"$geomIsEmpty"</span> <span style="color: #bc8f8f;">"exit 1"</span>
+  <span style="color: #b8860b;">WHAT</span>=<span style="color: #bc8f8f;">"Selection"</span>
+}
+<span style="color: #0000ff;">handleSaveCopy</span>() {
+  wl-copy --type image/png &lt;<span style="color: #bc8f8f;">"$FILE"</span> || die <span style="color: #bc8f8f;">"Clipboard error"</span>
+  <span style="color: #b8860b;">MESSAGE</span>=<span style="color: #bc8f8f;">"$MESSAGE and clipboard"</span>
+}
+
+<span style="color: #0000ff;">handleScreenshotSuccess</span>() {
+  <span style="color: #b8860b;">TITLE</span>=<span style="color: #bc8f8f;">"Screenshot of $SUBJECT"</span>
+  <span style="color: #b8860b;">MESSAGE</span>=$(<span style="font-weight: bold;">basename "$FILE"</span>)
+  <span style="color: #b8860b;">isSaveCopy</span>=<span style="color: #bc8f8f;">'[ "$ACTION" = "savecopy" ]'</span>
+  when <span style="color: #bc8f8f;">"$isSaveCopy"</span> <span style="color: #bc8f8f;">"handleSaveCopy"</span>
+  notifyOk <span style="color: #bc8f8f;">"$MESSAGE"</span> <span style="color: #bc8f8f;">"$TITLE"</span>
+  <span style="color: #00008b;">echo</span> <span style="color: #bc8f8f;">"$FILE"</span>
+}
+
+<span style="color: #0000ff;">handleScreenshotFailure</span>() {
+  notifyError <span style="color: #bc8f8f;">"Error taking screenshot with grim"</span>
+}
+
+<span style="color: #0000ff;">handleCopy</span>() {
+  takeScreenshot - <span style="color: #bc8f8f;">"$GEOM"</span> <span style="color: #bc8f8f;">"$OUTPUT"</span> | wl-copy --type image/png || die <span style="color: #bc8f8f;">"Clipboard error"</span>
+  notifyOk <span style="color: #bc8f8f;">"$WHAT copied to clipboard"</span>
+}
+
+<span style="color: #0000ff;">handleSave</span>() {
+  <span style="color: #b8860b;">screenshotTaken</span>=<span style="color: #bc8f8f;">"takeScreenshot \"$FILE\" \"$GEOM\" \"$OUTPUT\""</span>
+  whenOtherwise <span style="color: #bc8f8f;">"$screenshotTaken"</span> <span style="color: #bc8f8f;">\</span>
+    <span style="color: #bc8f8f;">"handleScreenshotSuccess"</span> <span style="color: #bc8f8f;">\</span>
+    <span style="color: #bc8f8f;">"handleScreenshotFailure"</span>
+}
+<span style="color: #0000ff;">handleUnknownSubject</span>() {
+  die <span style="color: #bc8f8f;">"Unknown subject to take a screenshot from"</span> <span style="color: #bc8f8f;">"$SUBJECT"</span>
+}
+<span style="color: #0000ff;">handleScreenshot</span>() {
+  <span style="color: #b8860b;">actionIsInvalid</span>=<span style="color: #bc8f8f;">'[ "$ACTION" != "save" ] &amp;&amp; [ "$ACTION" != "copy" ] &amp;&amp; [ "$ACTION" != "savecopy" ] &amp;&amp; [ "$ACTION" != "check" ]'</span>
+  <span style="color: #b8860b;">actionIsCheck</span>=<span style="color: #bc8f8f;">'[ "$ACTION" = "check" ]'</span>
+  <span style="color: #b8860b;">subjectIsArea</span>=<span style="color: #bc8f8f;">'[ "$SUBJECT" = "area" ]'</span>
+  <span style="color: #b8860b;">subjectIsActiveWindow</span>=<span style="color: #bc8f8f;">'[ "$SUBJECT" = "active" ]'</span>
+  <span style="color: #b8860b;">subjectIsScreen</span>=<span style="color: #bc8f8f;">'[ "$SUBJECT" = "screen" ]'</span>
+  <span style="color: #b8860b;">subjectIsOutput</span>=<span style="color: #bc8f8f;">'[ "$SUBJECT" = "output" ]'</span>
+  <span style="color: #b8860b;">subjectIsWindow</span>=<span style="color: #bc8f8f;">'[ "$SUBJECT" = "window" ]'</span>
+  <span style="color: #b8860b;">subjectIsAnything</span>=<span style="color: #bc8f8f;">'[ "$SUBJECT" = "anything" ]'</span>
+  <span style="color: #b8860b;">subjectIsUnknown</span>=true
+  any <span style="color: #bc8f8f;">\</span>
+    <span style="color: #bc8f8f;">"$actionIsInvalid:printUsageMsg"</span> <span style="color: #bc8f8f;">\</span>
+    <span style="color: #bc8f8f;">"$actionIsCheck:checkRequiredTools"</span> <span style="color: #bc8f8f;">\</span>
+    <span style="color: #bc8f8f;">"$subjectIsArea:selectArea"</span> <span style="color: #bc8f8f;">\</span>
+    <span style="color: #bc8f8f;">"$subjectIsActiveWindow:selectActiveWindow"</span> <span style="color: #bc8f8f;">\</span>
+    <span style="color: #bc8f8f;">"$subjectIsScreen:selectScreen"</span> <span style="color: #bc8f8f;">\</span>
+    <span style="color: #bc8f8f;">"$subjectIsOutput:selectOutput"</span> <span style="color: #bc8f8f;">\</span>
+    <span style="color: #bc8f8f;">"$subjectIsWindow:selectWindow"</span> <span style="color: #bc8f8f;">\</span>
+    <span style="color: #bc8f8f;">"$subjectIsAnything:selectAnything"</span> <span style="color: #bc8f8f;">\</span>
+    <span style="color: #bc8f8f;">"$subjectIsUnknown:handleUnknownSubject"</span>
+
+  <span style="color: #b8860b;">wait</span>=<span style="color: #bc8f8f;">'[ "$WAIT" != "no" ]'</span>
+  when <span style="color: #bc8f8f;">"$wait"</span> <span style="color: #bc8f8f;">"sleep $WAIT"</span>
+
+  <span style="color: #b8860b;">actionIsCopy</span>=<span style="color: #bc8f8f;">'[ "$ACTION" = "copy" ]'</span>
+
+  whenOtherwise <span style="color: #bc8f8f;">"$actionIsCopy"</span> <span style="color: #bc8f8f;">\</span>
+    <span style="color: #bc8f8f;">"handleCopy"</span> <span style="color: #bc8f8f;">\</span>
+    <span style="color: #bc8f8f;">"handleSave"</span>
+}
+
+parseArgs <span style="color: #bc8f8f;">"$@"</span>
+handleScreenshot
+</pre>
+</div>
 </div>
 </div>
 </div>
@@ -299,7 +1842,7 @@ include /etc/sway/config.d/*
 <div id="postamble" class="status">
 <p class="date">Date: 2025-07-27 Sun 00:00</p>
 <p class="author">Author: Kristian Alexander P</p>
-<p class="date">Created: 2025-07-27 Sun 15:17</p>
+<p class="date">Created: 2025-09-17 Wed 10:13</p>
 </div>
 </body>
 </html>
