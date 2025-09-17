@@ -22,6 +22,11 @@
 This is my personal /sway/ window manager configuration. The aim is:
 - Very minimal configuration :: Copy what worked from my [[https://alexforsale.github.io/dotfiles-i3/][i3 configuration]].
 - Use the default application :: When possible, that is.
+** Dependencies
+- Nerd Fonts :: Get them from [[https://www.nerdfonts.com/][here]].
+- Polkit-Kde-Agent :: Polkit is used for controlling system-wide privileges.
+- wl-clipboard :: provides =wl-copy= and =wl-paste= command.
+- pwvucontrol :: Pipewire volume control.
 * The configuration.
 I will start from the default (on /archlinux/ it's provided in the package, and can be found on ~/etc/sway/config~)
 #+name: sway config
@@ -320,15 +325,6 @@ I will start from the default (on /archlinux/ it's provided in the package, and 
   set $foreground $color07
   set $background $color00
 #+end_src
-
-#+begin_src conf
-  client.focused            $foreground  $background  $foreground $background $background
-  client.unfocused          $foreground  $background  $foreground $background $background
-  client.focused_inactive   $foreground  $background  $foreground $background $background
-  client.urgent             $foreground  $background  $foreground $background $background
-  client.placeholder        $foreground  $background  $foreground $background $background
-  client.focused_tab_title  $foreground  $background  $foreground $background $background
-#+end_src
 ** Output
 #+begin_src conf
   output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
@@ -345,14 +341,33 @@ I will start from the default (on /archlinux/ it's provided in the package, and 
 #+end_src
 ** Application Autostart
 #+begin_src conf
-  exec dunst
-  exec emacs --daemon
+  exec systemctl --user import-environment WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP SWAYSOCK I3SOCK XCURSOR_SIZE XCURSOR_THEME QT_QPA_PLATFORMTHEME SSH_AUTH_SOCK
+  exec dbus-update-activation-environment --systemd --all &
+  exec /usr/lib/polkit-kde-authentication-agent-1 &
+  exec gnome-keyring-daemon --components=pkcs11,secrets,ssh -r -d &
+  exec wl-paste --type text --watch cliphist store &
+  exec wl-paste --type image --watch cliphist store &
+  exec /usr/bin/kdeconnectd
+  exec mako
+  exec $terminal --class ncmpcpp -e ncmpcpp
 #+end_src
 ** Colors
+#+begin_src conf
+  client.focused            $foreground  $background  $foreground $background $background
+  client.unfocused          $foreground  $background  $foreground $background $background
+  client.focused_inactive   $foreground  $background  $foreground $background $background
+  client.urgent             $foreground  $background  $foreground $background $background
+  client.placeholder        $foreground  $background  $foreground $background $background
+  client.focused_tab_title  $foreground  $background  $foreground $background $background
+#+end_src
 ** Keybinding
 *** Menu
 #+begin_src conf
   bindsym $mod+d exec $menu
+#+end_src
+*** Audio
+#+begin_src conf
+  bindsym $mod+v exec pwvucontrol
 #+end_src
 *** Media keys
 #+begin_src conf
@@ -469,7 +484,7 @@ horizontally
 #+end_src
 vertically
 #+begin_src conf
-  bindsym $mod+Control+v split v exec $notify "Vertical split"
+  bindsym $mod+Control+v split v; exec $notify "Vertical split"
 #+end_src
 **** fullscreen toggle
 #+begin_src conf
@@ -601,7 +616,6 @@ This only work in floating mode.
 
   bindsym $mod+r mode "resize"
 #+end_src
-
 *** Exit sway
 #+begin_src conf
     bindsym $mod+q exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
@@ -633,15 +647,304 @@ This only work in floating mode.
       }
   }
 #+end_src
+
+#+begin_src conf
+  bindsym $mod+Control+m bar mode toggle
+#+end_src
 ** Window rules
+*** Audio
+#+begin_src conf
+  for_window [instance="(?i)pavucontrol"] floating enable
+  for_window [title="(?i)alsamixer"] floating enable
+  for_window [app_id="com.saivert.pwvucontrol"] floating enable; resize set 600 100; move position center
+#+end_src
+*** anki
+#+begin_src conf
+  for_window [class=".*(?i)anki"] floating enable
+#+end_src
 *** borderless
 #+begin_src conf
   for_window [class=".*"] border pixel 0
 #+end_src
+*** cheese
+#+begin_src conf
+  for_window [app_id="org.gnome.Cheese"] floating enable; resize set 680 680; move position center
+#+end_src
+*** easyeffects
+#+begin_src conf
+  for_window [class="(?i)easyeffects"] floating enable resize set 680 680 move position center
+#+end_src
+*** floating dialog window
+#+begin_src conf
+  for_window [window_role="About"] floating enable
+  for_window [window_role="Organizer"] floating enable
+  for_window [window_role="Preferences"] floating enable
+  for_window [window_role="bubble"] floating enable
+  for_window [window_role="page-info"] floating enable
+  for_window [window_role="pop-up"] floating enable
+  for_window [window_role="task_dialog"] floating enable
+  for_window [window_role="toolbox"] floating enable
+  for_window [window_role="webconsole"] floating enable
+  for_window [window_type="dialog"] floating enable
+  for_window [window_type="menu"] floating enable
+  for_window [class=".*FileRoller"] floating enable resize set 680 680 move position center
+  for_window [class="(?i)file-roller"] floating enable
+  for_window [window_role="GtkFileChooserDialog"] floating enable
+#+end_src
+*** gvim
+#+begin_src conf
+  for_window [class="Gvim"] floating disable
+#+end_src
+*** htop
+#+begin_src conf
+  for_window [class="(?i)htop"] floating enable
+#+end_src
+*** kdeconnect
+#+begin_src conf
+  for_window [class="(?i)org.kde.kdeconnect.app"] floating enable
+#+end_src
+*** khal
+#+begin_src conf
+  for_window [class="(?i)khal"] floating enable
+#+end_src
+*** ncmpcpp
+#+begin_src conf
+  for_window [class="(?i)ncmpcpp"] floating enable; move scratchpad
+#+end_src
+*** OBS
+#+begin_src conf
+  for_window [class="(?i)com.obsproject.studio" title="(?i)auto-configuration-wizard"] floating enable resize set 680 680 move position center
+#+end_src
+*** polkit
+#+begin_src conf
+  for_window [class="^org.kde.polkit-kde-authentication-agent-1"] floating enable
+#+end_src
+*** screenkey
+#+begin_src conf
+  for_window [class="(?i)screenkey"] floating enable
+#+end_src
+*** Steam
+#+begin_src conf
+  for_window [class="(?i)steam.*"] floating enable resize set 680 680 move position center
+#+end_src
+*** thunderbird
+#+begin_src conf
+  for_window [class="thunderbird" title="status"] floating enable
+  for_window [class="thunderbird" title="(.*)Reminders"] floating enable
+  for_window [class="thunderbird" title="Write.*"] floating enable resize set 680 680
+  for_window [class="thunderbird" title="Search.*"] floating enable resize set 600 200
+  for_window [class="thunderbird" title="Confirm.*"] floating enable resize set 600 200
+  for_window [class="thunderbird" title="Send.*"] floating enable
+  for_window [class="Msgcompose.*"] floating enable resize set 680 680
+#+end_src
+*** transmission
+#+begin_src conf
+  for_window [class="(?i)transmission.*"] floating enable
+#+end_src
+*** vim
+#+begin_src conf
+  for_window [class="(?i)vim"] floating enable
+#+end_src
+*** virt-manager
+#+begin_src conf
+  for_window [class="virt-manager"] floating enable resize set 680 680 move position center
+#+end_src
+** Workspace assignment
+*** workspace 3
+#+begin_src conf
+  assign [class="qutebrowser"] $ws3
+  assign [class="firefox"] $ws3
+  assign [class="google-chrome"] $ws3
+  assign [class="Nyxt"] $ws3
+  assign [class="pidgin"] $ws7
+#+end_src
+Web browser goes here.
+*** workspace 4
+#+begin_src conf
+  assign [class="Evolution"] $ws4
+  assign [class="thunderbird"] $ws4
+#+end_src
+For when I use GUI mail client.
+*** workspace 5
+#+begin_src conf
+  assign [class="Thunar"] $ws5
+#+end_src
+File manager.
+*** workspace 6
+#+begin_src conf
+  assign [title="Libreoffice"] $ws6
+  assign [title="com-sonicwall-NetExtender"] $ws6
+  assign [title="Bitwarden"] $ws6
+  assign [title="zoom"] $ws6
+#+end_src
+Office-related
+*** workspace 7
+*** workspace 8
+#+begin_src conf
+  assign [class="Rhythmbox"] $ws8
+  assign [class="vlc"] $ws8
+  assign [class="mpv"] $ws8
+  assign [class="Cheese"] $ws8
+  assign [class="Spotify"] $ws8
+  assign [class="Picard"] $ws8
+#+end_src
+Multimedia related.
+*** workspace 10
+#+begin_src conf
+  assign [class="Steam"] $ws10
+  assign [title="Steam"] $ws10
+#+end_src
+Game!
 ** Include system configuration
 #+begin_src conf
   include /etc/sway/config.d/*
 #+end_src
+* Wofi
+** config
+:PROPERTIES:
+:header-args: :tangle ./.config/wofi/config :mkdirp t
+:END:
+
+#+begin_src conf
+  insensitive = true
+  term=alacritty
+  key_up=Up,Ctrl-p,Ctrl-k
+  key_down=Down,Ctrl-n,Ctrl-j
+  key_left=Left,Ctrl-b
+  key_right=Right,Ctrl-f
+  key_pgup=Page_Up,Alt-v
+  key_pgdn=Page_Down,Ctrl-f
+  key_exit=Escape,Ctrl-g,Ctrl-bracketleft
+  matching=fuzzy
+  allow_image=true
+  allow_markup=true
+  gtk_dark=true
+  dynamic_lines=false
+  close_on_focus_loss=true
+  single_click=true
+  height=30%
+  width=30%
+  columns=1
+  prompt=PROMPT
+#+end_src
+** style
+:PROPERTIES:
+:header-args: :tangle ./.config/wofi/style.css :mkdirp t
+:END:
+
+#+begin_src css
+  @define-color color00 #2e3440;
+  @define-color color01 #3b4252;
+  @define-color color02 #434c5e;
+  @define-color color03 #4c566a;
+  @define-color color04 #434c5e;
+  @define-color color05 #d8dee9;
+  @define-color color06 #e5e9f0;
+  @define-color color07 #eceff4;
+  @define-color color08 #8fbcbb;
+  @define-color color09 #88c0d0;
+  @define-color color010 #81a1c1;
+  @define-color color011 #5e81ac;
+  @define-color color012 #bf616a;
+  @define-color color013 #d08770;
+  @define-color color014 #ebcb8b;
+  @define-color color015 #a3be8c;
+  @define-color color016 #b48ead;
+
+  @define-color background-alpha rgba(46, 52, 64, 0.60);
+
+  #window {
+      margin-right: 100px;
+      border: 1px solid @color01;
+      background-color: @background-alpha;
+  }
+
+  #input {
+      color: @color07;
+
+  	margin-left: 100px;
+  	margin-right: 100px;
+  	margin-top: 10px;
+  	margin-bottom: 20px;
+
+  	box-shadow: none;
+
+      border: 1px solid @color01;
+  	border-radius: 20px;
+
+      background-color: @color00;
+  }
+
+  #input:focus {
+  	color: @color07;
+
+      margin-left: 10px;
+      margin-right: 10px;
+      margin-top: 10px;
+      margin-bottom: 20px;
+
+      background-color: @color01;
+  }
+
+  #text {
+      margin: 5px;
+      border: none;
+      color: @color07;
+  }
+
+  #entry {
+  	font-family: JetBrainsMonoNL Nerd Font Mono;
+  	border-radius: 20px;
+
+  	margin: 5px;
+  	margin-right: 20px;
+  	margin-left: 20px;
+  	padding-left: 10px;
+  }
+
+  #entry:focus {
+  	background: @color00;
+  	border-radius: 20px;
+  }
+
+  #entry:selected {
+  	background: @color00;
+  }
+
+  #entry:unselected {
+  	background: @color00;
+  }
+
+#+end_src
+* Mako
+** config
+:PROPERTIES:
+:header-args: :tangle ./.config/mako/config :mkdirp t
+:END:
+
+#+begin_src conf
+  max-history=5
+  on-button-left=invoke-default-action
+  on-button-right=dismiss
+  font=JetBrainsMonoNL Nerd Font Mono 8
+  background-color=#3b4252
+  text-color=#eceff4
+  border-color=#2e3440
+  border-size=1
+  border-radius=15
+  progress-color=over #5e81ac
+  width=300
+  height=200
+  padding=8, 11
+  margin=8, 11
+  outer-margin=8, 11
+  default-timeout=2500
+  max-visible=5
+  text-alignment=center
+  icon-path=/usr/share/icons/breeze:/usr/share/icons/Papirus-Dark
+  anchor=top-right
+#+end_src
+
 * Scripts
 ** grimshot
 :PROPERTIES:
